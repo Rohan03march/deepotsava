@@ -242,9 +242,15 @@
           border-radius: 12px;
           padding: 20px 30px 120px;
           background:rgba(0, 0, 0, 0.2);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
           overflow: hidden;
         }
+        /* Optional: Adjustments for very small screens */
+@media (max-width: 480px) {
+  .log-container {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  }
+}
     
         .login-section {
           position: absolute;

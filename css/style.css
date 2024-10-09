@@ -226,7 +226,17 @@ h6,
 /*** Facts & Quote ***/
 .facts,
 .quote {
-    background: rgba(105, 101, 96, 0.6);
+    background: rgba(105, 101, 96, 0.52);
+}
+/* Optional: Specific styles for smaller screens */
+@media (max-width: 768px) {
+    .facts,
+    .quote {
+        /* You can add mobile-specific styles here if needed */
+        /* For example, adjusting the font size */
+        font-size: 14px; /* Adjusts text size for better readability on phones */
+        background: rgba(105, 101, 96, 0.52);
+    }
 }
 
 
