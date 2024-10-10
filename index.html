@@ -41,6 +41,9 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+      <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <img src="./img/iskcon-bangalore-logo-black.png" alt="">
+    </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,7 +51,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="#about" class="nav-item nav-link">About</a>
-                <a href="#login" class="nav-item nav-link">Login</a>
+                <a href="#about" class="nav-item nav-link">Login</a>
             </div>
         </div>
     </nav>
@@ -68,15 +71,15 @@
 
         .desktop-banner {
             display: none;
-            background-image: url('./img/deepostavaimage.jpeg'); /* Add your desktop image URL */
-            height: 700px; /* Adjust height as needed */
+            background-image: url('./img/Depos1desktop.jpeg'); /* Add your desktop image URL */
+            height: 530px; /* Adjust height as needed */
             background-size: cover;
             background-position: center;
         }
 
         .mobile-banner {
             display: none;
-            background-image: url('./img/deepostavaimagephone.jpeg'); /* Add your mobile image URL */
+            background-image: url('./img/Dpos1mobile.jpeg'); /* Add your mobile image URL */
             height: 760px; /* Adjust height as needed */
             background-size: cover;
             background-position: center;
@@ -100,33 +103,288 @@
   <div class="container-xxl py-5" id="about">
     <div class="container">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h1 style="color: #3F1906;">About Deepotsava!</h1>
-                <h1 class="display-5 mb-4" >A Festival of Lights <br/> and Joy</h1>
-                <p class="mb-4" style="color: black;">Deepotsava, often referred to as the Festival of Lights, is a vibrant celebration that symbolizes the victory of light over darkness and knowledge over ignorance. This festival, celebrated primarily in various parts of India, brings communities together in a joyful atmosphere filled with festivities.</p>
-                <p class="mb-4" style="color: black;">During Deepotsava, homes and public spaces are beautifully decorated with diyas (oil lamps) and colorful rangolis. The flickering lights create a magical ambiance, inviting families and friends to partake in the celebrations. Traditional music, dance performances, and feasts featuring delicious sweets and snacks add to the joyous spirit.</p>
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+            <h1 style="color: #3F1906;">About Kartika Deepotsava</h1>
+            <p class="mb-4" style="color: black;">ISKCON Bangalore is celebrating the Kartika Deepotsava festival from 17 October to 15 November 2024.</p>
+            <p class="mb-4" style="color: black;">Deepotsava, also known as the Festival of Lights, is a month-long celebration commemorating Damodara-lila, the enchanting pastime of Lord Krishna stealing butter and being tied to a mortar by His loving mother Yashoda. The name 'Damodara' is derived from Sanskrit, where 'dama' means rope and 'udara' means belly, denoting Krishna bound by a rope.</p>
+                <p class="mb-4" style="color: black;">Kartika is revered as the most sacred month and is exceptionally dear to Lord Krishna. During this period, devotees adhere to strict vows (Damodara Vrata) and worship Lord Damodara by offering ghee lamps daily. The Padma Purana states: "Anyone who offers a ghee lamp to Lord Damodara in the month of Kartika will be freed from all kinds of sins and will attain the abode of Lord Hari."</p>
+            <div id="moreText" style="display: none;">
+                <p class="mb-4" style="color: black;">Every evening during Deepotsava, the temple hall is illuminated with hundreds of decorative lamps, emanating a transcendental radiance that elevates the spirit of devotion.</p>
+                <p class="mb-4" style="color: black;">The celebrations include an enthralling arati performed to Their Lordships, accompanied by the melodious rendition of the Damodarashtaka. This prayer beautifully glorifies the divine form of Lord Damodara and implores Him to grant His loving devotional service. Following the arati, all assembled devotees have the opportunity to offer ghee lamps to Lord Damodara and other Deities. The festivities conclude with an ecstatic shayana pallakki utsava.</p>
+                <p class="mb-4" style="color: black;">Participate in these spiritually enriching celebrations, offer a ghee lamp to Lord Damodara, and illuminate your heart with love and devotion for the Lord.</p>
             </div>
+            <button id="toggleButton" onclick="toggleText()" style="background-color: #3F1906; color: white; border: none; padding: 10px 15px; cursor: pointer;">
+                Show More
+            </button>
+        </div>
+        
+        <script>
+        function toggleText() {
+            const moreText = document.getElementById("moreText");
+            const button = document.getElementById("toggleButton");
+            
+            if (moreText.style.display === "none") {
+                moreText.style.display = "block";
+                button.textContent = "Show Less";
+            } else {
+                moreText.style.display = "none";
+                button.textContent = "Show More";
+            }
+        }
+        </script>
+        
             <div class="col-lg-6">
                 <div class="row g-4 align-items-center">
-                    <div class="col-md-6">
-                        <div class="row g-4">
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
-                                    <img src="./img/deepotsava1.jpg" alt="Description of Image 1" class="img-fluid" />
-                                </div>
-                            </div>
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
-                                    <img src="./img/deepotsave2.jpg" alt="Description of Image 2" class="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
+                  <div class="login-container" id="about">
+                    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"rel="stylesheet"/>
+                    <div class="log-container">
+                      <div class="signup-section">
+                        <header>Signup</header>
+                        <form method="post" action="">
+                          <div
+                            id="signUpMessage"
+                            class="messageDiv"
+                            style="display: none ;color:white"
+                          ></div>
+                          <input type="text" id="fName" placeholder="First Name" required />
+                          <input type="last" id="lName" placeholder="Last Name" required />
+                          <input type="phoneNo" id="phoneNo" placeholder="PhoneNo" required />
+                          <input
+                            type="Email"
+                            id="rEmail"
+                            placeholder="Email address"
+                            required
+                          />
+                          <input
+                            type="password"
+                            id="rPassword"
+                            placeholder="Password"
+                            required
+                          />
+                          <button type="submit" id="submitSignUp" class="btn">Signup</button>
+                        </form>
+                      </div>
+                
+                      <div class="login-section">
+                        <header>Login</header>
+                        <form method="post" action="">
+                          <div
+                            id="signInMessage"
+                            class="messageDiv"
+                            style="display: none"
+                          ></div>
+                          <input type="email" id="email" placeholder="Email address" required />
+                          <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            required
+                          />
+                          <p class="recover">
+                          <a id="reset" style="cursor: pointer;">Forgot Password ?</a>
+                        </p>
+                          <button type="submit" id="submitSignIn" class="btn">Login</button>
+                        </form>
+                      </div>
                     </div>
-                    <div class="col-md-6 wow fadeIn" data-wow-delay="0.7s">
-                        <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
-                            <img src="./img/ISKCON.jpg" alt="Description of Image 3" class="img-fluid" />
-                        </div>
-                    </div>
+                
+                    <!--Script for SignUp/login -->
+                    <script>
+                      const container = document.querySelector(".log-container");
+                      const signupButton = document.querySelector(".signup-section header");
+                      const loginButton = document.querySelector(".login-section header");
+                
+                      loginButton.addEventListener("click", () => {
+                        container.classList.add("active");
+                      });
+                
+                      signupButton.addEventListener("click", () => {
+                        container.classList.remove("active");
+                      });
+                    </script>
+                
+                    <script type="module" src="./js/firebaseauth.js"></script>
+                    <!--/Script for SignUp/login -->
+                  <!-- style for signup and login -->
+                  <style>
+                    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+                
+                    * {
+                      margin: 0;
+                      padding: 0;
+                      box-sizing: border-box;
+                      font-family: "Poppins", sans-serif;
+                    }
+                
+                    a {
+                      text-decoration: none;
+                    }
+                
+                    .login-container {
+                      height: 100vh;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    }
+                
+                    .log-container {
+                      position: relative;
+                      width: 460px;
+                      height: 640px;
+                      border-radius: 12px;
+                      padding: 20px 30px 120px;
+                      background:rgba(0, 0, 0, 0.2);
+                      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+                      overflow: hidden;
+                    }
+                    /* Optional: Adjustments for very small screens */
+            @media (max-width: 480px) {
+              .log-container {
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+              }
+            }
+                
+                    .login-section {
+                      position: absolute;
+                      left: 50%;
+                      bottom: -88%;
+                      transform: translateX(-50%);
+                      width: calc(100% + 180px);
+                      padding: 20px 140px;
+                      background: #fff;
+                      border-radius: 290px;
+                      height: 100%;
+                      transition: all 0.6s ease;
+                    }
+                
+                    .login-section header,
+                    .signup-section header {
+                      font-size: 32px;
+                      text-align: center;
+                      color: #fff;
+                      font-weight: 600;
+                      cursor: pointer;
+                    }
+                
+                    .login-section header {
+                      color: #333;
+                      opacity: 0.6;
+                    }
+                
+                    .social-buttons {
+                      margin-top: 40px;
+                      display: flex;
+                      align-items: center;
+                      gap: 15px;
+                    }
+                
+                    .social-buttons button {
+                      width: 100%;
+                      padding: 10px;
+                      background: #fff;
+                      border: none;
+                      border-radius: 10px;
+                      font-size: 16px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      cursor: pointer;
+                    }
+                
+                    .login-section .social-buttons button {
+                      border: 1px solid #000;
+                    }
+                
+                    .login-section .social-buttons button i,
+                    .signup-section .social-buttons button i {
+                      font-size: 25px;
+                    }
+                
+                    .separator {
+                      margin-top: 20px;
+                      display: flex;
+                      align-items: center;
+                      gap: 20px;
+                    }
+                
+                    .separator .line {
+                      width: 100%;
+                      height: 1px;
+                      background: #ccc;
+                    }
+                
+                    .separator p {
+                      color: #fff;
+                    }
+                
+                    .login-section .separator p {
+                      color: #000;
+                    }
+                
+                    .log-container form {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 20px;
+                      margin-top: 30px;
+                    }
+                
+                    form input {
+                      outline: none;
+                      border: none;
+                      padding: 10px 15px;
+                      font-size: 16px;
+                      color: #333;
+                      font-weight: 400;
+                      border-radius: 8px;
+                      background: #fff;
+                    }
+                
+                    .login-section input {
+                      border: 1px solid #aaa;
+                    }
+                
+                    form a {
+                      color: #333;
+                    }
+                
+                    .signup-section form a {
+                      color: #fff;
+                    }
+                
+                    form .btn {
+                      margin-top: 15px;
+                      border: none;
+                      padding: 10px 15px;
+                      border-radius: 8px;
+                      font-size: 18px;
+                      font-weight: 500;
+                      cursor: pointer;
+                      background-color: white;
+                    }
+                
+                    .login-section .btn {
+                      background: #303f9f;
+                      color: #fff;
+                      border: none;
+                    }
+                
+                    .log-container.active .login-section {
+                      bottom: -12%;
+                      border-radius: 220px;
+                      box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+                    }
+                
+                    .log-container.active .login-section header {
+                      opacity: 1;
+                    }
+                
+                    .log-container.active .signup-section header {
+                      opacity: 0.6;
+                    }
+                  </style>
+                  <!-- script for signup and login -->
+                  </div>
                 </div>
             </div>
         </div>
@@ -141,263 +399,6 @@
 
 <!-- Features End -->
 
-    <!-- Quote Start -->
-    <div class="container-fluid quote my-5 py-5" data-parallax="scroll" data-image-src="img/ISKCON.jpg" id="login">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="login-container" id="login">
-        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"rel="stylesheet"/>
-        <div class="log-container">
-          <div class="signup-section">
-            <header>Signup</header>
-            <form method="post" action="">
-              <div
-                id="signUpMessage"
-                class="messageDiv"
-                style="display: none ;color:white"
-              ></div>
-              <input type="text" id="fName" placeholder="First Name" required />
-              <input type="last" id="lName" placeholder="Last Name" required />
-              <input type="phoneNo" id="phoneNo" placeholder="PhoneNo" required />
-              <input
-                type="Email"
-                id="rEmail"
-                placeholder="Email address"
-                required
-              />
-              <input
-                type="password"
-                id="rPassword"
-                placeholder="Password"
-                required
-              />
-              <button type="submit" id="submitSignUp" class="btn">Signup</button>
-            </form>
-          </div>
-    
-          <div class="login-section">
-            <header>Login</header>
-            <form method="post" action="">
-              <div
-                id="signInMessage"
-                class="messageDiv"
-                style="display: none"
-              ></div>
-              <input type="email" id="email" placeholder="Email address" required />
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                required
-              />
-              <a href="#" id="reset">Forgot Password ?</a>
-              <button type="submit" id="submitSignIn" class="btn">Login</button>
-            </form>
-          </div>
-        </div>
-    
-        <!--Script for SignUp/login -->
-        <script>
-          const container = document.querySelector(".log-container");
-          const signupButton = document.querySelector(".signup-section header");
-          const loginButton = document.querySelector(".login-section header");
-    
-          loginButton.addEventListener("click", () => {
-            container.classList.add("active");
-          });
-    
-          signupButton.addEventListener("click", () => {
-            container.classList.remove("active");
-          });
-        </script>
-    
-        <script type="module" src="./js/firebaseauth.js"></script>
-        <!--/Script for SignUp/login -->
-      <!-- style for signup and login -->
-      <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
-    
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: "Poppins", sans-serif;
-        }
-    
-        a {
-          text-decoration: none;
-        }
-    
-        .login-container {
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-    
-        .log-container {
-          position: relative;
-          width: 460px;
-          height: 640px;
-          border-radius: 12px;
-          padding: 20px 30px 120px;
-          background:rgba(0, 0, 0, 0.2);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-          overflow: hidden;
-        }
-        /* Optional: Adjustments for very small screens */
-@media (max-width: 480px) {
-  .log-container {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  }
-}
-    
-        .login-section {
-          position: absolute;
-          left: 50%;
-          bottom: -88%;
-          transform: translateX(-50%);
-          width: calc(100% + 180px);
-          padding: 20px 140px;
-          background: #fff;
-          border-radius: 290px;
-          height: 100%;
-          transition: all 0.6s ease;
-        }
-    
-        .login-section header,
-        .signup-section header {
-          font-size: 32px;
-          text-align: center;
-          color: #fff;
-          font-weight: 600;
-          cursor: pointer;
-        }
-    
-        .login-section header {
-          color: #333;
-          opacity: 0.6;
-        }
-    
-        .social-buttons {
-          margin-top: 40px;
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-    
-        .social-buttons button {
-          width: 100%;
-          padding: 10px;
-          background: #fff;
-          border: none;
-          border-radius: 10px;
-          font-size: 16px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          cursor: pointer;
-        }
-    
-        .login-section .social-buttons button {
-          border: 1px solid #000;
-        }
-    
-        .login-section .social-buttons button i,
-        .signup-section .social-buttons button i {
-          font-size: 25px;
-        }
-    
-        .separator {
-          margin-top: 20px;
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-    
-        .separator .line {
-          width: 100%;
-          height: 1px;
-          background: #ccc;
-        }
-    
-        .separator p {
-          color: #fff;
-        }
-    
-        .login-section .separator p {
-          color: #000;
-        }
-    
-        .log-container form {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          margin-top: 30px;
-        }
-    
-        form input {
-          outline: none;
-          border: none;
-          padding: 10px 15px;
-          font-size: 16px;
-          color: #333;
-          font-weight: 400;
-          border-radius: 8px;
-          background: #fff;
-        }
-    
-        .login-section input {
-          border: 1px solid #aaa;
-        }
-    
-        form a {
-          color: #333;
-        }
-    
-        .signup-section form a {
-          color: #fff;
-        }
-    
-        form .btn {
-          margin-top: 15px;
-          border: none;
-          padding: 10px 15px;
-          border-radius: 8px;
-          font-size: 18px;
-          font-weight: 500;
-          cursor: pointer;
-          background-color: white;
-        }
-    
-        .login-section .btn {
-          background: #303f9f;
-          color: #fff;
-          border: none;
-        }
-    
-        .log-container.active .login-section {
-          bottom: -12%;
-          border-radius: 220px;
-          box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
-        }
-    
-        .log-container.active .login-section header {
-          opacity: 1;
-        }
-    
-        .log-container.active .signup-section header {
-          opacity: 0.6;
-        }
-      </style>
-      <!-- script for signup and login -->
-      </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quote End -->
-
     <!-- <p class="centered-text"> The Compaign starts in</p>
     <style>
         .centered-text {
@@ -411,18 +412,18 @@
      <!--Count down -->
 <br/>
 
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-3" style="color: gold;">
-                    Copyright &copy;2024 ISKCON Bangalore, All Rights Reserved.
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Copyright End -->
+   <!-- Copyright Start -->
+<div class="container-fluid copyright py-4" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">
+  <div class="container">
+      <div class="row">
+          <div class="col-12 text-center mb-3" style="color: black;">
+             <b> Copyright &copy; 2024 ISKCON Bangalore, All Rights Reserved.</b>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Copyright End -->
+
 
 
     <!-- Back to Top -->

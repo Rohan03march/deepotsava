@@ -1,39 +1,24 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-import {
-  getFirestore,
-  setDoc,
-  doc,
-} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+ // Import the functions you need from the SDKs you need
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDno8QgblBD8lgW-UON2Au2EgCaWv8yFek",
-//     authDomain: "login-form-3e9d9.firebaseapp.com",
-//     projectId: "login-form-3e9d9",
-//     storageBucket: "login-form-3e9d9.appspot.com",
-//     messagingSenderId: "930056639787",
-//     appId: "1:930056639787:web:a0b4e7ba5dc484452ea16e"
-// };
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ const firebaseConfig = {
+   apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
+   authDomain: "iskcon-contest-3bf89.firebaseapp.com",
+   projectId: "iskcon-contest-3bf89",
+   storageBucket: "iskcon-contest-3bf89.appspot.com",
+   messagingSenderId: "216348940232",
+   appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
+   measurementId: "G-CJJLTTHHFJ"
+ };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB1jmMeWclknWulKUJLTu894mY5L3IHexw",
-  authDomain: "iskcondeepostava-d89e2.firebaseapp.com",
-  projectId: "iskcondeepostava-d89e2",
-  storageBucket: "iskcondeepostava-d89e2.appspot.com",
-  messagingSenderId: "599506324462",
-  appId: "1:599506324462:web:7997c5dde1549d26365cff",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+ // Initialize Firebase
+ const app = initializeApp(firebaseConfig);
+ const analytics = getAnalytics(app);
+const auth = getAuth();
 const db = getFirestore();
 
 function showMessage(message, divId) {
