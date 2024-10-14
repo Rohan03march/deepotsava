@@ -19,7 +19,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+    
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -49,8 +49,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="indexs.html" class="nav-item nav-link active">Home</a>
-                <a href="#download" class="nav-item nav-link">Download the Manual</a>
                 <a href="index.html" class="nav-item nav-link">Logout</a>
             </div>
         </div>
@@ -210,6 +208,96 @@
     <script type="module" src="js/indexs.js"></script>
     <!-- Team End -->
 
+    
+    <div class="container-xl py-5" id="Grid" style="display: none;">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h1 style="color:#3F1906">Participate</h1>
+                <h2 style="color: #3F1906;">In The Daily Activities</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="image-container">
+                        <img src="./img/temple.jpg" alt="Image 1" class="img-fluid">
+                        <div class="overlay">
+                            <h3 style="color:white">Hare Krishna Maha Mantra</h3>
+                            <a href="./HareKrishnaMantra.html" class="btn btn-primary">Participate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="image-container">
+                        <img src="./img/temple.jpg" alt="Image 2" class="img-fluid">
+                        <div class="overlay">
+                            <h3 style="color: white;">Reading Krishna Book</h3>
+                            <a href="./KrishnaBook.html" class="btn btn-primary">Participate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="image-container">
+                        <img src="./img/temple.jpg" alt="Image 3" class="img-fluid">
+                        <div class="overlay">
+                            <h3 style="color: white;">Offer Ghee To The Lord (Upload image)</h3>
+                            <a href="./uploadImage.html" class="btn btn-primary">Participate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="image-container">
+                        <img src="./img/temple.jpg" alt="Image 4" class="img-fluid">
+                        <div class="overlay">
+                            <h3 style="color:white">Daily Activities</h3>
+                            <a href="./dailyActivity.html" class="btn btn-primary">Participate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(63, 25, 6, 0.7); /* semi-transparent background */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            margin-top: 10px;
+        }
+    </style>
+    
+
     <!-- <p class="centered-text"> The Compaign starts in</p>
     <style>
         .centered-text {
@@ -260,6 +348,7 @@
     <script src="lib/parallax/parallax.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
+  
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

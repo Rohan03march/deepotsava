@@ -57,6 +57,8 @@ const handleDownload = async (manualKey, filePath) => {
 
             // Hide the download section permanently
             document.getElementById("download").style.display = "none";
+            // Show the Grid section
+            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
         }, 5000);
     } else {
         alert("Please log in to download the manual."); // Handle case where user is not logged in
@@ -70,6 +72,8 @@ if (userId) {
         if (hasDownloaded) {
             // Hide the download section permanently if already downloaded
             document.getElementById("download").style.display = "none";
+            // Show the Grid section
+            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
         }
     });
 }
