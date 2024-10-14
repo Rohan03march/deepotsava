@@ -1,187 +1,100 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-  uploadBytesResumable,
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+// Import the functions you need from the SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-// // Your Firebase config
-// const firebaseConfig = {
-//   apiKey: "AIzaSyB1jmMeWclknWulKUJLTu894mY5L3IHexw",
-//   authDomain: "iskcondeepostava-d89e2.firebaseapp.com",
-//   projectId: "iskcondeepostava-d89e2",
-//   storageBucket: "iskcondeepostava-d89e2.appspot.com",
-//   messagingSenderId: "599506324462",
-//   appId: "1:599506324462:web:7997c5dde1549d26365cff",
-// };
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
-  authDomain: "iskcon-contest-3bf89.firebaseapp.com",
-  projectId: "iskcon-contest-3bf89",
-  storageBucket: "iskcon-contest-3bf89.appspot.com",
-  messagingSenderId: "216348940232",
-  appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
-  measurementId: "G-CJJLTTHHFJ"
+    apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
+    authDomain: "iskcon-contest-3bf89.firebaseapp.com",
+    projectId: "iskcon-contest-3bf89",
+    storageBucket: "iskcon-contest-3bf89.appspot.com",
+    messagingSenderId: "216348940232",
+    appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
+    measurementId: "G-CJJLTTHHFJ"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+const db = getFirestore();
 
-let userId;
+// Function to check if the user has already downloaded the manual
+const checkDownloadStatus = async (userId) => {
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+    return userDoc.exists() && userDoc.data().downloaded === true;
+};
 
-// Handle authentication state
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    userId = user.uid;
-    await loadImages(); // Load images after user is authenticated
-  } else {
-    window.location.href = "index.html"; // Redirect if not logged in
-  }
-});
+// Function to handle downloads
+const handleDownload = async (manualKey, filePath) => {
+    const userId = localStorage.getItem("loggedInUserId");
 
-document.getElementById("dropZone").addEventListener("click", () => {
-  document.getElementById("fileInput").click();
-});
-
-document.getElementById("dropZone").addEventListener("dragover", (e) => {
-  e.preventDefault();
-  document.getElementById("dropZone").style.backgroundColor = "#e8f0ff";
-});
-
-document.getElementById("dropZone").addEventListener("dragleave", () => {
-  document.getElementById("dropZone").style.backgroundColor = "";
-});
-
-document.getElementById("dropZone").addEventListener("drop", (e) => {
-  e.preventDefault();
-  document.getElementById("dropZone").style.backgroundColor = "";
-  handleFiles(e.dataTransfer.files);
-});
-
-document.getElementById("fileInput").addEventListener("change", (e) => {
-  handleFiles(e.target.files);
-});
-
-async function handleFiles(files) {
-  for (let file of files) {
-    if (!file.type.startsWith("image/")) {
-      continue;
-    }
-
-    // Create a more meaningful filename
-    const originalName = file.name.split(".")[0]; // Get original name without extension
-    const extension = file.name.split(".").pop(); // Get file extension
-    const newFileName = `${originalName}_${Date.now()}.${extension}`; // Append timestamp
-
-    const storageRef = ref(storage, `${userId}/${newFileName}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Show the progress container
-    const progressContainer = document.getElementById("progressContainer");
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
-    progressContainer.style.display = "block";
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressBar.style.width = `${progress}%`;
-        progressText.innerText = `${Math.floor(progress)}%`; // Update the percentage text
-
-        if (progress < 100) {
-          progressBar.style.backgroundColor = "blue"; // Intermediate color
+    if (userId) {
+        // Check download status
+        const hasDownloaded = await checkDownloadStatus(userId);
+        if (hasDownloaded) {
+            return; // Exit if the user has already downloaded
         }
-      },
-      (error) => {
-        document.getElementById("status").innerText =
-          "Upload failed: " + error.message;
-        progressContainer.style.display = "none"; // Hide progress bar on error
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        document.getElementById("status").innerText = "Upload successful!";
-        progressBar.style.backgroundColor = "green"; // Change color to green on completion
-        progressText.innerText = "100%"; // Set text to 100%
 
-        const imageObject = { url: downloadURL, name: newFileName }; // Use new filename
+        // Create a temporary link to trigger the download
+        const link = document.createElement('a');
+        link.href = filePath;
+        link.download = ''; // This attribute ensures the file is downloaded
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
-        const userDocRef = doc(db, "users", userId);
-        await updateDoc(userDocRef, {
-          images: arrayUnion(imageObject),
-        });
+        // Set the download flag in Firestore
+        const userRef = doc(db, "users", userId);
+        await setDoc(userRef, { downloaded: true }, { merge: true });
 
-        displayImage(imageObject);
-        progressContainer.style.display = "none"; // Hide progress bar after upload
-      }
-    );
-  }
-}
+        // Show alert message after 5 seconds
+        setTimeout(() => {
+            alert("Thank you for downloading!");
 
-async function loadImages() {
-  const userDocRef = doc(db, "users", userId);
-  const userDoc = await getDoc(userDocRef);
-
-  if (userDoc.exists()) {
-    const images = userDoc.data().images || [];
-    images.forEach((image) => {
-      displayImage(image);
-    });
-  }
-}
-
-function displayImage(image) {
-  const imageGrid = document.getElementById("imageGrid");
-
-  const imageContainer = document.createElement("div");
-  imageContainer.classList.add("imageContainer");
-
-  const img = document.createElement("img");
-  img.src = image.url;
-  img.alt = image.name;
-
-  const deleteButton = document.createElement("button");
-  deleteButton.innerText = "Delete";
-  deleteButton.classList.add("deleteButton");
-
-  deleteButton.addEventListener("click", async () => {
-    const storageRef = ref(storage, `${userId}/${image.name}`);
-    try {
-      await deleteObject(storageRef);
-
-      const userDocRef = doc(db, "users", userId);
-      await updateDoc(userDocRef, {
-        images: arrayRemove(image),
-      });
-
-      imageGrid.removeChild(imageContainer);
-    } catch (error) {
-      alert("Error deleting image: " + error.message);
+            // Hide the download section permanently
+            document.getElementById("download").style.display = "none";
+            // Show the Grid section
+            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
+        }, 5000);
+    } else {
+        alert("Please log in to download the manual."); // Handle case where user is not logged in
     }
-  });
+};
 
-  imageContainer.appendChild(img);
-  imageContainer.appendChild(deleteButton);
-  imageGrid.appendChild(imageContainer);
+// Check user download status on page load
+const userId = localStorage.getItem("loggedInUserId");
+if (userId) {
+    checkDownloadStatus(userId).then(hasDownloaded => {
+        if (hasDownloaded) {
+            // Hide the download section permanently if already downloaded
+            document.getElementById("download").style.display = "none";
+            // Show the Grid section
+            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
+        }
+    });
 }
+
+// Attach event listeners to download buttons
+document.getElementById("downloadKannada").addEventListener("click", (event) => {
+    event.preventDefault();
+    handleDownload("downloadKannada", "./assets/PDF/Damodara-Vrata Kannada.pdf");
+});
+
+document.getElementById("downloadHindi").addEventListener("click", (event) => {
+    event.preventDefault();
+    handleDownload("downloadHindi", ".assets/PDF/Damodara-Vrata Hindi.pdf");
+});
+
+document.getElementById("downloadEnglish").addEventListener("click", (event) => {
+    event.preventDefault();
+    handleDownload("downloadEnglish", ".assets/PDF/Damodara-Vrata English.pdf");
+});
+
+document.getElementById("downloadTelugu").addEventListener("click", (event) => {
+    event.preventDefault();
+    handleDownload("downloadTelugu", ".assets/PDF/Damodara-Vrata Telegu.pdf");
+});
