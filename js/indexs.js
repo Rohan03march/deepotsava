@@ -39,7 +39,7 @@ const handleDownload = async (manualKey, filePath) => {
             return; // Exit if the user has already downloaded
         }
 
-        // Trigger the download immediately
+        // Create a temporary link to trigger the download
         const link = document.createElement('a');
         link.href = filePath;
         link.download = ''; // This attribute ensures the file is downloaded
@@ -58,6 +58,8 @@ const handleDownload = async (manualKey, filePath) => {
             // Hide the download section permanently
             document.getElementById("download").style.display = "none";
         }, 5000);
+    } else {
+        alert("Please log in to download the manual."); // Handle case where user is not logged in
     }
 };
 
