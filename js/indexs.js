@@ -39,13 +39,26 @@ const handleDownload = async (manualKey, filePath) => {
             return; // Exit if the user has already downloaded
         }
 
+        // Trigger the download immediately
+        const link = document.createElement('a');
+        link.href = filePath;
+        link.download = ''; // This attribute ensures the file is downloaded
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         // Set the download flag in Firestore
         const userRef = doc(db, "users", userId);
         await setDoc(userRef, { downloaded: true }, { merge: true });
-    }
 
-    // Trigger the download
-    window.location.href = filePath;
+        // Show alert message after 5 seconds
+        setTimeout(() => {
+            alert("Thank you for downloading!");
+
+            // Hide the download section permanently
+            document.getElementById("download").style.display = "none";
+        }, 5000);
+    }
 };
 
 // Check user download status on page load
@@ -53,11 +66,8 @@ const userId = localStorage.getItem("loggedInUserId");
 if (userId) {
     checkDownloadStatus(userId).then(hasDownloaded => {
         if (hasDownloaded) {
-            // Show alert if the user has downloaded the manual
-            setTimeout(() => {
-                alert("Thank you for downloading!");
-                document.getElementById("download").style.display = "none"; // Hide the download section
-            }, 0); // Delay the alert to ensure it shows after page load
+            // Hide the download section permanently if already downloaded
+            document.getElementById("download").style.display = "none";
         }
     });
 }
