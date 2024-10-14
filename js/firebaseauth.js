@@ -19,7 +19,7 @@ import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10
  const app = initializeApp(firebaseConfig);
  const analytics = getAnalytics(app);
 const auth = getAuth();
-const db = getFirestore();
+const db = getFirestore(app);
 
 function showMessage(message, divId) {
   var messageDiv = document.getElementById(divId);
@@ -147,3 +147,50 @@ let ForgotPassword = () => {
     });
 };
 ForgotPassLabel.addEventListener("click", ForgotPassword);
+
+
+
+
+// Function to handle downloads
+const handleDownload = (manualKey, filePath) => {
+  const userId = localStorage.getItem("loggedInUserId");
+
+  if (userId) {
+      // Set the download flag in Firestore
+      const userRef = doc(db, "users", userId);
+      setDoc(userRef, { [manualKey]: true }, { merge: true })
+          .then(() => {
+              alert("Thank you for downloading!");
+              document.getElementById("download").style.display = "none"; // Hide the download section
+          })
+          .catch((error) => {
+              console.error("Error updating document: ", error);
+          });
+  } else {
+      alert("Please log in to download the manual.");
+  }
+
+  // Trigger the download
+  window.location.href = filePath;
+};
+
+// Attach event listeners to download buttons
+document.getElementById("downloadKannada").addEventListener("click", (event) => {
+  event.preventDefault();
+  handleDownload("downloadKannada", "./PDF/Damodara-Vrata Kannada.pdf");
+});
+
+document.getElementById("downloadHindi").addEventListener("click", (event) => {
+  event.preventDefault();
+  handleDownload("downloadHindi", "./PDF/Damodara-Vrata Hindi.pdf"); // Update the link accordingly
+});
+
+document.getElementById("downloadEnglish").addEventListener("click", (event) => {
+  event.preventDefault();
+  handleDownload("downloadEnglish", "./PDF/Damodara-Vrata English.pdf");
+});
+
+document.getElementById("downloadTelugu").addEventListener("click", (event) => {
+  event.preventDefault();
+  handleDownload("downloadTelugu", "./PDF/Damodara-Vrata Telegu.pdf");
+});
