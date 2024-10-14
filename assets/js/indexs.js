@@ -59,6 +59,7 @@ const handleDownload = async (manualKey, filePath) => {
             document.getElementById("download").style.display = "none";
             // Show the Grid section
             document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
+            document.getElementById("Grids").style.display = "block"; // Assuming 'block' is the desired display style
         }, 5000);
     } else {
         alert("Please log in to download the manual."); // Handle case where user is not logged in
@@ -74,6 +75,7 @@ if (userId) {
             document.getElementById("download").style.display = "none";
             // Show the Grid section
             document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
+            document.getElementById("Grids").style.display = "block"; // Assuming 'block' is the desired display style
         }
     });
 }
