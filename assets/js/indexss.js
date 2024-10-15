@@ -115,7 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
           progressBar.style.backgroundColor = "green";
           progressText.innerText = "100%";
 
-          const imageObject = { url: downloadURL, name: newFileName };
+          const imageObject = { 
+            url: downloadURL, 
+            name: newFileName, 
+            timestamp: new Date().toLocaleString() // Add timestamp here
+          };
 
           const userDocRef = doc(db, "users", userId);
           await updateDoc(userDocRef, {
@@ -152,6 +156,12 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = image.url;
     img.alt = image.name;
 
+    const timestamp = document.createElement("p");
+    timestamp.innerText = `Uploaded on: ${image.timestamp}`; // Display timestamp
+    timestamp.style.fontSize = "15px";
+    timestamp.style.textAlign = "center";
+    timestamp.style.color = "black";
+
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
     deleteButton.classList.add("deleteButton");
@@ -173,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     imageContainer.appendChild(img);
+    imageContainer.appendChild(timestamp); // Append timestamp below the image
     imageContainer.appendChild(deleteButton);
     imageGrid.appendChild(imageContainer);
   } 
