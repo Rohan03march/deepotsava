@@ -59,62 +59,31 @@
     <!-- Navbar End -->
 
     <body>
-        <h1>Offer a Ghee Lamp to the Lord</h1>
-       
-        <div class="container">
-            <div class="text">
-                <p style="color:black;font-size:24px">
-                    <b> Offering a ghee lamp to Lord Damodara </b> is a vital part of the <b> Deepotsava celebrations </b> during the sacred month of Kartika. This act of devotion attracts immense blessings from the Lord and brings abundant spiritual rewards, as described in the scriptures.
-                </p>
-                <p style="color:black;font-size:24px">
-                   <b> Offer a ghee lamp with devotion to the Deity or to a picture of Lord Krishna, Vishnu, or any of His incarnations, such as Lord Rama or Narasimha </b>. <br/> You may also recite the Damodarashtakam while offering the lamp.
-                </p>
-                <p style="color:black;font-size:24px">
-                   <b> Let us know how you celebrated Deepotsava by uploading a photo of offering a ghee lamp. </b>
-                </p>
-            </div>
-            <div class="UploadImage">
-                <h1 style="color: black;">Upload Image</h1>
-                <div id="dropZone">
-                    <img src="assets/images/image.png" alt="Upload Icon" />
-                    <p style="color:black;font-size:20px">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
-                </div>
-                <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
-                <p id="status" style="color:rgb(0, 0, 0);"></p>
-                <div id="progressContainer" style="display: none;">
-                    <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
-                    <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
-                </div>
-            </div>
+        <h1>Water the Tulasi Plant</h1>
+        <p style="text-align: center; color:black;font-size:24px">
+            Tulasi Maharani is one of the greatest devotees of Lord Krishna, and the Lord’s lotus feet are always adorned with Tulasi leaves.
+        </p>
+        <p style="text-align: center;color:black;font-size:24px">
+            In the Skanda Purana, it is stated that simply by seeing or touching the Tulasi tree one can become relieved from all distresses and diseases.
+             Simply by offering obeisance to and pouring water on the Tulasi tree, one can become freed from the fear of being sent to the court of Yamaraja.
+        </p>
+        <p style="text-align: center;color:black;font-size:24px">
+           <b> Upload a photo of your engagement in this devotional activity. </b>
+        </p>
+    <div class="UploadImage">
+        <h1 style="color: black;">Upload Image</h1>
+        <div id="dropZone">
+            <img src="assets/images/image.png" alt="Upload Icon" />
+            <p style="color:black">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
         </div>
-        
-        <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .text, .UploadImage {
-            flex: 1;
-            padding: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            .text {
-                order: 1;
-                text-align: center;
-            }
-            .UploadImage {
-                order: 2;
-            }
-        }
-        </style>
-         
-
-    <div id="imageGrid"></div>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
+        <p id="status" style="color:rgb(0, 0, 0);"></p>
+        <div id="progressContainer" style="display: none;">
+            <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
+            <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
+        </div>
+        <div id="imageGrid"></div>
+    </div>
     
     
     <!--style for upload image-->
@@ -139,7 +108,7 @@
         #dropZone {
             border: 2px dashed black;
             border-radius: 10px;
-            padding:100px;
+            padding:20px;
             text-align: center;
             transition: background-color 0.3s;
             margin: 0 auto;
@@ -147,13 +116,6 @@
             cursor: pointer;
             position: relative;
         }
-          
-        @media (max-width: 768px) {
-           #dropZone {
-            padding: 30px;
-           }
-        }
-
         #dropZone:hover {
             background-color: transparent;
         }

@@ -69,33 +69,11 @@
        <b> Chant 108 times</b>, preferably with a japa mala, while listening to this recording of <br/> <b> Srila Prabhupada (Founder-Acharya of ISKCON)</b> chanting the Hare Krishna Mahamantra.
     </p>
     <h1 style="text-align: center;">Hare Krishna Mahamantra</h1>
-    <p style="text-align: center; color:black;font-size:24px" ><b>Hare Krishna Hare Krishna</b> <br/>
-       <b> Krishna Krishna Hare Hare</b> <br/>
-       <b> Hare Rama Hare Rama </b> <br/>
-       <b> Rama Rama Hare Hare</b></p>
-        <h1 style="text-align: center;">How to Chant the Hare Krishna Maha mantra?</h1>
-<P style="text-align: center; color:black;font-size:24px" >
-    The japa mala contains <b> 108 small beads</b> and one <b> large bead, known as the head bead.</b> <br/>
-Begin by chanting the following <b> Pancha-tattva mantra once before each round.</b>
-</P>
-<p  style="text-align: center; color:black;font-size:24px">
-   <b> śrī-kṛṣṇa-caitanya </b> <br/>
-<b>prabhu-nityānanda </b> <br/>
-<b>śrī-advaita gadādhara</b> <br/>
-<b>śrīvāsādi-gaura-bhakta-vṛnda</b>
-</p>
-
-<h1 style="text-align: center;">chanting Hare Krishna Maha mantra</h1>
-    <ol style="color: black; font-size:24px">
-        <li>Start on a bead adjacent to <b>the head bead.</b> </li>
-        <li>Hold it with <b> the thumb and middle finger of your right hand</b>, and chant the complete Hare Krishna Mahamantra once.
-        </li>
-        <li>Proceed to the next bead and repeat this process.</li>
-        <li>Continue chanting on each bead until you return to the head bead. This completes one round of japa.</li>
-    </ol>
+    
     <!--text end-->
 
-    <div class="music">    
+    <div class="music">
+        
         <div class="container">
             <div class="player-img">
                 <img src="" class="active" id="cover">
@@ -119,250 +97,257 @@ Begin by chanting the following <b> Pancha-tattva mantra once before each round.
             </div>
     
         </div>
+        <style>
+    
+        
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+            
+            html{
+                box-sizing: border-box;
+            }
+            
+            .music{
+                margin: 0;
+                font-family: 'Ubuntu', sans-serif;
+                font-size: 12px;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* Media query for phone devices */
+@media (max-width: 767px) {
+    .music {
+        min-height: 70vh;
+    }
+}
+            
+            .background{
+                position: fixed;
+                width: 200%;
+                height: 200%;
+                top: -50%;
+                left: -50%;
+                z-index: -1;
+            }
+            
+            .background img{
+                position: absolute;
+                margin: auto;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                min-width: 50%;
+                min-height: 50%;
+                filter: blur(15px);
+                -webkit-filter: blur(50px);
+                transform: scale(1.1);
+            }
+            
+            .container{
+                background-color: #e7e7e7;
+                height: 500px;
+                width: 420px;
+                border-radius: 20px;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+                transition: all 0.5s ease;
+            }
+            
+            .container:hover{
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            }
+            
+            .player-img{
+                width: 300px;
+                height: 300px;
+                position: relative;
+                top: -50px;
+                left: 50px;
+            }
+            
+            .player-img img{
+                object-fit: cover;
+                border-radius: 20px;
+                height: 0;
+                width: 0;
+                opacity: 0;
+                box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
+            }
+            
+            .player-img:hover img{
+                box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.8);
+            }
+            
+            .player-img img.active{
+                width: 100%;
+                height: 100%;
+                transition: all 0.5s;
+                opacity: 1;
+            }
+            
+            h2{
+                font-size: 25px;
+                text-align: center;
+                font-weight: 500;
+                margin: 10px 0 0;
+            }
+            
+            h3{
+                font-size: 18px;
+                text-align: center;
+                font-weight: 500;
+                margin: 10px 0 0;
+            }
+            
+            .player-progress{
+                background-color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 40px 20px 35px;
+                height: 6px;
+                width: 90%;
+            }
+            
+            .progress{
+                background-color: #212121;
+                border-radius: 5px;
+                height: 100%;
+                width: 0%;
+                transition: width 0.1s linear;
+            }
+            
+            .music-duration{
+                position: relative;
+                top: -25px;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .player-controls{
+                position: relative;
+                top: -15px;
+                left: 120px;
+                width: 200px;
+            }
+            
+            .fa-solid{
+                font-size: 30px;
+                color: #666;
+                margin-right: 30px;
+                cursor: pointer;
+                user-select: none;
+                transition: all 0.3s ease;
+            }
+            
+            .fa-solid:hover{
+                filter: brightness(40%);
+            }
+            
+            .play-button{
+                font-size: 35px;
+                position: relative;
+                top: 3px;
+            }
+            
+            </style>
+            
+            <script>
+                const image = document.getElementById('cover'),
+                title = document.getElementById('music-title'),
+                artist = document.getElementById('music-artist'),
+                currentTimeEl = document.getElementById('current-time'),
+                durationEl = document.getElementById('duration'),
+                progress = document.getElementById('progress'),
+                playerProgress = document.getElementById('player-progress'),
+                prevBtn = document.getElementById('prev'),
+                nextBtn = document.getElementById('next'),
+                playBtn = document.getElementById('play'),
+                background = document.getElementById('bg-img');
+            
+            const music = new Audio();
+            
+            const songs = [
+                {
+                    path: 'assets/1.mp3',
+                    displayName: 'Hare Krishna Maha Mantra',
+                    cover: 'assets/1.jpg',
+                    artist: 'Srila Prabhupada',
+                }, 
+            ];
+            
+            let musicIndex = 0;
+            let isPlaying = false;
+            
+            function togglePlay() {
+                if (isPlaying) {
+                    pauseMusic();
+                } else {
+                    playMusic();
+                }
+            }
+            
+            function playMusic() {
+                isPlaying = true;
+                // Change play button icon
+                playBtn.classList.replace('fa-play', 'fa-pause');
+                // Set button hover title
+                playBtn.setAttribute('title', 'Pause');
+                music.play();
+            }
+            
+            function pauseMusic() {
+                isPlaying = false;
+                // Change pause button icon
+                playBtn.classList.replace('fa-pause', 'fa-play');
+                // Set button hover title
+                playBtn.setAttribute('title', 'Play');
+                music.pause();
+            }
+            
+            function loadMusic(song) {
+                music.src = song.path;
+                title.textContent = song.displayName;
+                artist.textContent = song.artist;
+                image.src = song.cover;
+                background.src = song.cover;
+            }
+            
+            function changeMusic(direction) {
+                musicIndex = (musicIndex + direction + songs.length) % songs.length;
+                loadMusic(songs[musicIndex]);
+                playMusic();
+            }
+            
+            function updateProgressBar() {
+                const { duration, currentTime } = music;
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = `${progressPercent}%`;
+            
+                const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
+                durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
+                currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(currentTime % 60)}`;
+            }
+            
+            function setProgressBar(e) {
+                const width = playerProgress.clientWidth;
+                const clickX = e.offsetX;
+                music.currentTime = (clickX / width) * music.duration;
+            }
+            
+            playBtn.addEventListener('click', togglePlay);
+            prevBtn.addEventListener('click', () => changeMusic(-1));
+            nextBtn.addEventListener('click', () => changeMusic(1));
+            music.addEventListener('ended', () => changeMusic(1));
+            music.addEventListener('timeupdate', updateProgressBar);
+            playerProgress.addEventListener('click', setProgressBar);
+            
+            loadMusic(songs[musicIndex]);
+            </script>
     </div>
     </html>
     
-    <style>
     
-        
-    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
-    
-    html{
-        box-sizing: border-box;
-    }
-    
-    .music{
-        margin: 0;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 12px;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .background{
-        position: fixed;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        z-index: -1;
-    }
-    
-    .background img{
-        position: absolute;
-        margin: auto;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        min-width: 50%;
-        min-height: 50%;
-        filter: blur(15px);
-        -webkit-filter: blur(50px);
-        transform: scale(1.1);
-    }
-    
-    .container{
-        background-color: #e7e7e7;
-        height: 500px;
-        width: 420px;
-        border-radius: 20px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        transition: all 0.5s ease;
-    }
-    
-    .container:hover{
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-    }
-    
-    .player-img{
-        width: 300px;
-        height: 300px;
-        position: relative;
-        top: -50px;
-        left: 50px;
-    }
-    
-    .player-img img{
-        object-fit: cover;
-        border-radius: 20px;
-        height: 0;
-        width: 0;
-        opacity: 0;
-        box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
-    }
-    
-    .player-img:hover img{
-        box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.8);
-    }
-    
-    .player-img img.active{
-        width: 100%;
-        height: 100%;
-        transition: all 0.5s;
-        opacity: 1;
-    }
-    
-    h2{
-        font-size: 25px;
-        text-align: center;
-        font-weight: 500;
-        margin: 10px 0 0;
-    }
-    
-    h3{
-        font-size: 18px;
-        text-align: center;
-        font-weight: 500;
-        margin: 10px 0 0;
-    }
-    
-    .player-progress{
-        background-color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 40px 20px 35px;
-        height: 6px;
-        width: 90%;
-    }
-    
-    .progress{
-        background-color: #212121;
-        border-radius: 5px;
-        height: 100%;
-        width: 0%;
-        transition: width 0.1s linear;
-    }
-    
-    .music-duration{
-        position: relative;
-        top: -25px;
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .player-controls{
-        position: relative;
-        top: -15px;
-        left: 120px;
-        width: 200px;
-    }
-    
-    .fa-solid{
-        font-size: 30px;
-        color: #666;
-        margin-right: 30px;
-        cursor: pointer;
-        user-select: none;
-        transition: all 0.3s ease;
-    }
-    
-    .fa-solid:hover{
-        filter: brightness(40%);
-    }
-    
-    .play-button{
-        font-size: 35px;
-        position: relative;
-        top: 3px;
-    }
-    
-    </style>
-    
-    <script>
-        const image = document.getElementById('cover'),
-        title = document.getElementById('music-title'),
-        artist = document.getElementById('music-artist'),
-        currentTimeEl = document.getElementById('current-time'),
-        durationEl = document.getElementById('duration'),
-        progress = document.getElementById('progress'),
-        playerProgress = document.getElementById('player-progress'),
-        prevBtn = document.getElementById('prev'),
-        nextBtn = document.getElementById('next'),
-        playBtn = document.getElementById('play'),
-        background = document.getElementById('bg-img');
-    
-    const music = new Audio();
-    
-    const songs = [
-        {
-            path: 'assets/1.mp3',
-            displayName: 'Hare Krishna Maha Mantra',
-            cover: 'assets/1.jpg',
-            artist: 'Srila Prabhupada',
-        }, 
-    ];
-    
-    let musicIndex = 0;
-    let isPlaying = false;
-    
-    function togglePlay() {
-        if (isPlaying) {
-            pauseMusic();
-        } else {
-            playMusic();
-        }
-    }
-    
-    function playMusic() {
-        isPlaying = true;
-        // Change play button icon
-        playBtn.classList.replace('fa-play', 'fa-pause');
-        // Set button hover title
-        playBtn.setAttribute('title', 'Pause');
-        music.play();
-    }
-    
-    function pauseMusic() {
-        isPlaying = false;
-        // Change pause button icon
-        playBtn.classList.replace('fa-pause', 'fa-play');
-        // Set button hover title
-        playBtn.setAttribute('title', 'Play');
-        music.pause();
-    }
-    
-    function loadMusic(song) {
-        music.src = song.path;
-        title.textContent = song.displayName;
-        artist.textContent = song.artist;
-        image.src = song.cover;
-        background.src = song.cover;
-    }
-    
-    function changeMusic(direction) {
-        musicIndex = (musicIndex + direction + songs.length) % songs.length;
-        loadMusic(songs[musicIndex]);
-        playMusic();
-    }
-    
-    function updateProgressBar() {
-        const { duration, currentTime } = music;
-        const progressPercent = (currentTime / duration) * 100;
-        progress.style.width = `${progressPercent}%`;
-    
-        const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
-        durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
-        currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(currentTime % 60)}`;
-    }
-    
-    function setProgressBar(e) {
-        const width = playerProgress.clientWidth;
-        const clickX = e.offsetX;
-        music.currentTime = (clickX / width) * music.duration;
-    }
-    
-    playBtn.addEventListener('click', togglePlay);
-    prevBtn.addEventListener('click', () => changeMusic(-1));
-    nextBtn.addEventListener('click', () => changeMusic(1));
-    music.addEventListener('ended', () => changeMusic(1));
-    music.addEventListener('timeupdate', updateProgressBar);
-    playerProgress.addEventListener('click', setProgressBar);
-    
-    loadMusic(songs[musicIndex]);
-    </script>
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 <style>

@@ -112,7 +112,7 @@
         border-radius: 4px;
         margin-bottom: 10px;
         resize: none;
-        font-size: 16px; /* Increase font size for better readability */
+        font-size: 16px;
     }
 
     .submit {
@@ -122,7 +122,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        font-size: 16px; /* Increase font size for better readability */
+        font-size: 16px;
     }
 
     button:hover {
@@ -137,34 +137,39 @@
         list-style-type: none;
         padding: 0;
     }
-    
+
     .comment {
         background-color: #e9ecef;
         padding: 10px;
         border-radius: 4px;
         margin-bottom: 10px;
-        word-wrap: break-word; /* Add word wrapping */
-        max-width: 100%; /* Ensure comments don't exceed container width */
-        overflow-wrap: break-word; /* Ensure long words break */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        display: block;
     }
-    
+
+    .timestamp {
+        font-size: 0.8em;
+        color: black;
+        margin-left: 10px;
+    }
 
     /* Mobile Styles */
     @media (max-width: 600px) {
         .container {
-            padding: 15px; /* Slightly reduce padding on smaller screens */
+            padding: 15px;
         }
 
         .submit {
-            width: 100%; /* Make the button full width on mobile */
+            width: 100%;
         }
 
         textarea {
-            font-size: 14px; /* Slightly reduce font size for mobile */
+            font-size: 14px;
         }
 
         h1, h2 {
-            font-size: 22px; /* Adjust heading sizes for better mobile view */
+            font-size: 22px;
         }
     }
 </style>
@@ -197,7 +202,7 @@
 
     <!-- Template Javascript -->
     <script src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/Book.js"></script>
+    <script type="module" src="./assets/js/book.js"></script>
 </div>
 
 </html>

@@ -1,745 +1,146 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
-    authDomain: "iskcon-contest-3bf89.firebaseapp.com",
-    projectId: "iskcon-contest-3bf89",
-    storageBucket: "iskcon-contest-3bf89.appspot.com",
-    messagingSenderId: "216348940232",
-    appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
-    measurementId: "G-CJJLTTHHFJ"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
+            authDomain: "iskcon-contest-3bf89.firebaseapp.com",
+            projectId: "iskcon-contest-3bf89",
+            storageBucket: "iskcon-contest-3bf89.appspot.com",
+            messagingSenderId: "216348940232",
+            appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
+            measurementId: "G-CJJLTTHHFJ"
+        };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
-const db = getFirestore();
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore();
 
-const commentInput = document.getElementById("commentInput");
-const submitButton = document.getElementById("submitButton");
-const commentsList = document.getElementById("commentsList");
+        const commentInput = document.getElementById("commentInput");
+        const submitButton = document.getElementById("submitButton");
+        const commentsList = document.getElementById("commentsList");
 
-const keywords = {
-    "Krishna": 5,
-    "Bhagavad Gita": 5,
-    "Hindu mythology": 5,
-    "Radha Krishna": 5,
-    "Vrindavan": 5,
-    "Karma": 5,
-    "Dharma": 5,
-    "Krishna Leela": 5,
-    "Divine play": 5,
-    "Incarnation": 5,
-    "Vishnu": 5,
-    "Mahabharata": 5,
-    "Radha": 5,
-    "Bhakti": 5,
-    "Yadava": 5,
-    "Govinda": 5,
-    "Gopala": 5,
-    "Charioteer": 5,
-    "Flute": 5,
-    "Butter": 5,
-    "Rasa Lila": 5,
-    "Nanda Baba": 5,
-    "Yashoda": 5,
-    "Mathura": 5,
-    "Battle of Kurukshetra": 5,
-    "Avatar": 5,
-    "Veda": 5,
-    "Divine love": 5,
-    "Sankirtan": 5,
-    "Krishna Janmashtami": 5,
-    "Guru": 5,
-    "Devotion": 5,
-    "Vishnu Purana": 5,
-    "Chaitanya Mahaprabhu": 5,
-    "Sri Krishna": 5,
-    "Gita Updesh": 5,
-    "Vishwarupa": 5,
-    "Govardhan": 5,
-    "Mirabai": 5,
-    "Bhagavatam": 5,
-    "Pastimes": 5,
-    "Sri Vrindavan": 5,
-    "Celestial": 5,
-    "Sanskrit": 5,
-    "Rukmini": 5,
-    "Mahabharat": 5,
-    "Sita": 5,
-    "Rama": 5,
-    "Anand": 5,
-    "Vatsalya": 5,
-    "Radha-Krishna": 5,
-    "Sankhya": 5,
-    "Yoga": 5,
-    "Chandra": 5,
-    "Devaki": 5,
-    "Kansa": 5,
-    "Shree": 5,
-    "Swarupa": 5,
-    "Krishna's miracles": 5,
-    "Dances of Krishna": 5,
-    "Uddhava": 5,
-    "Krishna's teachings": 5,
-    "Prasadam": 5,
-    "Bhagavata Purana": 5,
-    "Kirtan": 5,
-    "Maha Mantra": 5,
-    "Vaishnavism": 5,
-    "Alankara": 5,
-    "Radha Raman": 5,
-    "Kamsa": 5,
-    "Krishna consciousness": 5,
-    "Divine pastimes": 5,
-    "Astrology": 5,
-    "Festivals": 5,
-    "Sadhana": 5,
-    "Akshaya Tritiya": 5,
-    "Shri Radha": 5,
-    "Krishna's childhood": 5,
-    "Vedic texts": 5,
-    "Philosophical teachings": 5,
-    "Krishna's form": 5,
-    "Love and surrender": 5,
-    "Spirituality": 5,
-    "Krishna's birth": 5,
-    "Shri Dham": 5,
-    "Rasa": 5,
-    "Kaliya Mardana": 5,
-    "Uttara Gita": 5,
-    "Spirituality": 5,
-    "Krishna's love stories": 5,
-    "Divine attributes": 5,
-    "Krishna's wisdom": 5,
-    "Divine protector": 5,
-    "Bhagavad Dharma": 5,
-    "Bal Krishna": 5,
-    "Sri Krishna's life": 5,
-    "Govindaji": 5,
-    "Rasa Krishna": 5,
-    "Krishna's teachings on love": 5,
-    "Radharani": 5,
-    "Vraja": 5,
-    "Krishna's relationships": 5,
-    "Divine compassion": 5,
-    "Bhakti movement": 5,
-    "Sankhya Yoga": 5,
-    "Krishna's battles": 5,
-    "Divine friendship": 5,
-    "Krishna in art": 5,
-    "Bhakti yoga": 5,
-    "Krishna's virtues": 5,
-    "Chaitanya's teachings": 5,
-    "Devotional literature": 5,
-    "Festival of colors": 5,
-    "Radha's devotion": 5,
-    "Krishna's philosophy": 5,
-    "Pastime of Govardhan": 5,
-    "Devotional songs": 5,
-    "Spiritual leader": 5,
-    "Krishna's form": 5,
-    "Kirtan tradition": 5,
-    "Shri Krishna Katha": 5,
-    "Love and surrender": 5,
-    "Vishnu's role": 5,
-    "Philosophical teachings": 5,
-    "Krishna's chariot": 5,
-    "Krishna's teachings on duty": 5,
-    "Nitya Leela": 5,
-    "Seva": 5,
-    "Krishna's wisdom": 5,
-    "Sankirtan movement": 5,
-    "Krishna's disciples": 5,
-    "Mahotsav": 5,
-    "Krishna's flute music": 5,
-    "Soul and spirit": 5,
-    "Radha and Gopis": 5,
-    "Sri Krishna's pastimes": 5,
-    "Krishna's love for humanity": 5,
-    "Spiritual awakening": 5,
-    "Krishna's festivals": 5,
-    "Divine playfulness": 5,
-    "Krishna's teachings on life": 5,
-    "Sri Krishna's glory": 5,
-    "Krishna's compassion": 5,
-    "Philosophy of love": 5,
-    "Devotional practices": 5,
-    "Krishna's eternal form": 5,
-    "Radha Krishna's union": 5,
-    "Life lessons from Krishna": 5,
-    "Krishna's spiritual guidance": 5,
-    "Devotion in action": 5,
-    "Krishna's role in Mahabharata": 5,
-    "Bhakti as a path": 5,
-    "Krishna's legacy": 5,
-    "Celestial dance": 5,
-    "Krishna's teachings on righteousness": 5,
-    "Divine romance": 5,
-    "Sri Radha's love": 5,
-    "Philosophy of Krishna": 5,
-    "Krishna's presence": 5,
-    "Vedic wisdom": 5,
-    "Sri Krishna's teachings": 5,
-    "Symbolism in Krishna's life": 5,
-    "Divine mercy": 5,
-    "Krishna and Arjuna": 5,
-    "Essence of Bhakti": 5,
-    "Spiritual enlightenment": 5,
-    "Krishna's transformative power": 5,
-    "Role of Yashoda": 5,
-    "Krishna's journey": 5,
-    "Spirituality in everyday life": 5,
-    "Radha's devotion": 5,
-    "Krishna's divine nature": 5,
-    "Krishna and the cosmos": 5,
-    "Krishna's philosophy of action": 5,
-    "Krishna's mysticism": 5,
-    "Devotion in literature": 5,
-    "Life in Vrindavan": 5,
-    "Krishna's role in culture": 5,
-    "Shri Krishna's teachings on love": 5,
-    "Krishna and the universe": 5,
-    "Sri Krishna's miracles": 5,
-    "Bhakti and community": 5,
-    "Krishna in contemporary art": 5,
-    "Spiritual significance of Krishna": 5,
-    "Krishna's influence on spirituality": 5,
-    "Symbolism of the flute": 5,
-    "Krishna's relationship with nature": 5,
-    "Krishna's teachings on balance": 5,
-    "Krishna's gifts": 5,
-    "Philosophy of detachment": 5,
-    "Teachings of love": 5,
-    "Radharani's role": 5,
-    "Krishna's discipleship": 5,
-    "Krishna's wisdom in action": 5,
-    "Significance of the Gita": 5,
-    "Krishna's influence on arts": 5,
-    "Krishna and devotion": 5,
-    "Philosophy of unity": 5,
-    "Krishna's journey to enlightenment": 5,
-    "Krishna's role in the cosmos": 5,
-    "Life lessons from the Gita": 5,
-    "Devotional practices in Hinduism": 5,
-    "Krishna's teachings on community": 5,
-    "Essence of love": 5,
-    "Inspiring": 5,
-    "Transformative": 5,
-    "Uplifting": 5,
-    "Empowering": 5,
-    "Nurturing": 5,
-    "Enlightening": 5,
-    "Joyful": 5,
-    "Compassionate": 5,
-    "Harmonious": 5,
-    "Positive": 5,
-    "Resilient": 5,
-    "Gratifying": 5,
-    "Wholesome": 5,
-    "Supportive": 5,
-    "Mindful": 5,
-    "Authentic": 5,
-    "Hopeful": 5,
-    "Benevolent": 5,
-    "Loving": 5,
-    "Sustainable": 5,
-    "Motivational": 5,
-    "Encouraging": 5,
-    "Radiant": 5,
-    "Serene": 5,
-    "Joyous": 5,
-    "Gracious": 5,
-    "Transformational": 5,
-    "Visionary": 5,
-    "Faithful": 5,
-    "Fulfilling": 5,
-    "Creative": 5,
-    "Balanced": 5,
-    "Peaceful": 5,
-    "Open-hearted": 5,
-    "Trustworthy": 5,
-    "Adventurous": 5,
-    "Empathetic": 5,
-    "Thoughtful": 5,
-    "Enriching": 5,
-    "Reflective": 5,
-    "Cheerful": 5,
-    "Playful": 5,
-    "Joyful": 5,
-    "Dynamic": 5,
-    "Affectionate": 5,
-    "Content": 5,
-    "Invigorating": 5,
-    "Serendipitous": 5,
-    "Purposeful": 5,
-    "Wise": 5,
-    "Radiant": 5,
-    "Passionate": 5,
-    "Humorous": 5,
-    "Admirable": 5,
-    "Connected": 5,
-    "Joy-filled": 5,
-    "Grateful": 5,
-    "Kind-hearted": 5,
-    "Transforming": 5,
-    "Selfless": 5,
-    "Innovative": 5,
-    "Compassionate": 5,
-    "Unity": 5,
-    "Exuberant": 5,
-    "Alive": 5,
-    "Hope-bringing": 5,
-    "Affirmative": 5,
-    "Resourceful": 5,
-    "Charming": 5,
-    "Adorable": 5,
-    "Respectful": 5,
-    "Fulfilled": 5,
-    "Engaging": 5,
-    "Honorable": 5,
-    "Encouraging": 5,
-    "Faith-inspiring": 5,
-    "Good-natured": 5,
-    "Inviting": 5,
-    "Delightful": 5,
-    "Trusting": 5,
-    "Cheerful": 5,
-    "Supportive": 5,
-    "Generous": 5,
-    "Exciting": 5,
-    "Beloved": 5,
-    "Connected": 5,
-    "Empowering": 5,
-    "Visionary": 5,
-    "Fulfilling": 5,
-    "Honest": 5,
-    "Enthusiastic": 5,
-    "Transformative": 5,
-    "Spirited": 5,
-    "Wholesome": 5,
-    "Invigorating": 5,
-    "Refreshing": 5,
-    "Spiritual": 5,
-    "Warm-hearted": 5,
-    "Dynamic": 5,
-    "Resilient": 5,
-    "Visionary": 5,
-    "Meaningful": 5,
-    "Radiating": 5,
-    "Optimistic": 5,
-    "Joyous": 5,
-    "Rejuvenating": 5,
-    "Affirming": 5,
-    "Exhilarating": 5,
-    "Vibrant": 5,
-    "Heartfelt": 5,
-    "Love": 5,
-    "Compassion": 5,
-    "Affection": 5,
-    "Devotion": 5,
-    "Kindness": 5,
-    "Passion": 5,
-    "Connection": 5,
-    "Romance": 5,
-    "Unity": 5,
-    "Care": 5,
-    "Friendship": 5,
-    "Empathy": 5,
-    "Generosity": 5,
-    "Warmth": 5,
-    "Intimacy": 5,
-    "Trust": 5,
-    "Joy": 5,
-    "Support": 5,
-    "Respect": 5,
-    "Devotion": 5,
-    "Gratitude": 5,
-    "Tenderness": 5,
-    "Heartfelt": 5,
-    "Understanding": 5,
-    "Togetherness": 5,
-    "Affectionate": 5,
-    "Charming": 5,
-    "Endearment": 5,
-    "Adoration": 5,
-    "Sincerity": 5,
-    "Sentiment": 5,
-    "Unity": 5,
-    "Bonding": 5,
-    "Heartwarming": 5,
-    "Loyalty": 5,
-    "Companionship": 5,
-    "Bliss": 5,
-    "Delight": 5,
-    "Engagement": 5,
-    "Nurture": 5,
-    "Passionate": 5,
-    "Fondness": 5,
-    "Appreciation": 5,
-    "Soulmate": 5,
-    "Devotion": 5,
-    "Warmheartedness": 5,
-    "Connectedness": 5,
-    "Enduring": 5,
-    "Heart's desire": 5,
-    "Emotional": 5,
-    "Unconditional": 5,
-    "Comfort": 5,
-    "Intimacy": 5,
-    "True love": 5,
-    "Romantic": 5,
-    "Beloved": 5,
-    "Togetherness": 5,
-    "Passionate": 5,
-    "Heartfelt": 5,
-    "Unity": 5,
-    "Blissful": 5,
-    "Delightful": 5,
-    "Charming": 5,
-    "Serene": 5,
-    "Adoring": 5,
-    "Warm": 5,
-    "Sweetness": 5,
-    "Caregiving": 5,
-    "Radiant": 5,
-    "Generous spirit": 5,
-    "Soulful": 5,
-    "Enchanting": 5,
-    "Enchanting": 5,
-    "Heart's joy": 5,
-    "Caring": 5,
-    "Light-hearted": 5,
-    "Soulful connection": 5,
-    "Emotional bond": 5,
-    "Compassionate love": 5,
-    "Joyful": 5,
-    "Embrace": 5,
-    "Belonging": 5,
-    "Supportive love": 5,
-    "Everlasting": 5,
-    "Fondness": 5,
-    "Intimate": 5,
-    "Adoration": 5,
-    "Emotional intimacy": 5,
-    "Fond memories": 5,
-    "Endearing": 5,
-    "Joyful heart": 5,
-    "Heartfelt affection": 5,
-    "Lovely": 5,
-    "Emotional connection": 5,
-    "Unified": 5,
-    "Heartwarming": 5,
-    "Together": 5,
-    "Belonging": 5,
-    "Devotional love": 5,
-    "Devoted": 5,
-    "Endearing love": 5,
-    "Life journey": 5,
-    "Meaningful experiences": 5,
-    "Personal growth": 5,
-    "Memorable moments": 5,
-    "Fulfillment": 5,
-    "Life lessons": 5,
-    "Positive experiences": 5,
-    "Rich experiences": 5,
-    "Transformative moments": 5,
-    "Joyful adventures": 5,
-    "Lifetime achievements": 5,
-    "Reflective experiences": 5,
-    "Enriching life": 5,
-    "Life milestones": 5,
-    "Beautiful memories": 5,
-    "Grateful living": 5,
-    "Life's blessings": 5,
-    "Shared moments": 5,
-    "Authentic connections": 5,
-    "Purposeful living": 5,
-    "Life fulfillment": 5,
-    "Life insights": 5,
-    "Deep connections": 5,
-    "Joyful encounters": 5,
-    "Legacy": 5,
-    "Appreciation of life": 5,
-    "Heartwarming stories": 5,
-    "Life satisfaction": 5,
-    "Gratitude": 5,
-    "Positive reflections": 5,
-    "Life's tapestry": 5,
-    "Wonderful experiences": 5,
-    "Meaningful connections": 5,
-    "Moments of joy": 5,
-    "Celebration of life": 5,
-    "Life appreciation": 5,
-    "Life's beauty": 5,
-    "Rich narratives": 5,
-    "Life reflections": 5,
-    "Adventures of a lifetime": 5,
-    "Uplifting experiences": 5,
-    "Joyful memories": 5,
-    "Life enrichment": 5,
-    "Positive impact": 5,
-    "Lifetime memories": 5,
-    "Experiential learning": 5,
-    "Life's journey": 5,
-    "Wholesome experiences": 5,
-    "Gracious moments": 5,
-    "Life transformation": 5,
-    "Sweet memories": 5,
-    "Life's simplicity": 5,
-    "Beautiful connections": 5,
-    "Experiences that matter": 5,
-    "Personal stories": 5,
-    "Moments of clarity": 5,
-    "Heartfelt experiences": 5,
-    "Life's highlights": 5,
-    "Joyous living": 5,
-    "Life's rewards": 5,
-    "Adventurous spirit": 5,
-    "Life's richness": 5,
-    "Positivity": 5,
-    "Gratifying experiences": 5,
-    "Life's lessons learned": 5,
-    "Meaningful journeys": 5,
-    "Sweet encounters": 5,
-    "Life's treasures": 5,
-    "Collective memories": 5,
-    "Valuable experiences": 5,
-    "Life's adventures": 5,
-    "Happy moments": 5,
-    "Life's paths": 5,
-    "Encounters with kindness": 5,
-    "Emotional richness": 5,
-    "Life satisfaction": 5,
-    "Life stories": 5,
-    "Insightful comments": 5,
-    "Constructive feedback": 5,
-    "Positive remarks": 5,
-    "Engaging discussions": 5,
-    "Thought-provoking insights": 5,
-    "Encouraging responses": 5,
-    "Helpful suggestions": 5,
-    "Meaningful interactions": 5,
-    "Critical feedback": 5,
-    "Appreciative notes": 5,
-    "Respectful dialogue": 5,
-    "Informative comments": 5,
-    "Community engagement": 5,
-    "User opinions": 5,
-    "Collaborative feedback": 5,
-    "Empathetic remarks": 5,
-    "Balanced perspectives": 5,
-    "Valuable contributions": 5,
-    "Open dialogue": 5,
-    "Friendly exchanges": 5,
-    "Respectful comments": 5,
-    "Constructive criticism": 5,
-    "Supportive feedback": 5,
-    "Thoughtful observations": 5,
-    "Interactive feedback": 5,
-    "Collaborative discussions": 5,
-    "Personal reflections": 5,
-    "Respectful critiques": 5,
-    "Clear communication": 5,
-    "Honest opinions": 5,
-    "Engaging feedback": 5,
-    "Positive interactions": 5,
-    "Feedback loops": 5,
-    "Community support": 5,
-    "Productive conversations": 5,
-    "Impactful comments": 5,
-    "Collaborative input": 5,
-    "Encouraging dialogue": 5,
-    "Valued opinions": 5,
-    "Helpful comments": 5,
-    "Constructive dialogue": 5,
-    "Respectful discussions": 5,
-    "Engagement metrics": 5,
-    "Reflective comments": 5,
-    "Balanced feedback": 5,
-    "Enriching conversations": 5,
-    "Open feedback": 5,
-    "User engagement": 5,
-    "Positive dialogue": 5,
-    "Active participation": 5,
-    "Critical insights": 5,
-    "Feedback exchange": 5,
-    "Supportive remarks": 5,
-    "Thoughtful dialogue": 5,
-    "Participatory comments": 5,
-    "Positive reinforcement": 5,
-    "Encouraging notes": 5,
-    "Dynamic discussions": 5,
-    "Thoughtful feedback": 5,
-    "Insightful feedback": 5,
-    "Interactive comments": 5,
-    "Meaningful feedback": 5,
-    "Welcoming dialogue": 5,
-    "Community interaction": 5,
-    "Feedback sharing": 5,
-    "Constructive interaction": 5,
-    "User contributions": 5,
-    "Respectful feedback": 5,
-    "Positive impact": 5,
-    "Life enhancement": 5,
-    "Personal growth": 5,
-    "Transformative experiences": 5,
-    "Meaningful contributions": 5,
-    "Empowerment": 5,
-    "Life-changing moments": 5,
-    "Uplifting experiences": 5,
-    "Joyful transformations": 5,
-    "Inspiring change": 5,
-    "Supportive relationships": 5,
-    "Community involvement": 5,
-    "Healthy mindset": 5,
-    "Resilience building": 5,
-    "Gratitude practice": 5,
-    "Compassionate actions": 5,
-    "Mindful living": 5,
-    "Self-improvement": 5,
-    "Encouraging environment": 5,
-    "Purposeful actions": 5,
-    "Positive relationships": 5,
-    "Emotional well-being": 5,
-    "Optimistic outlook": 5,
-    "Life satisfaction": 5,
-    "Legacy of kindness": 5,
-    "Joyful connections": 5,
-    "Motivational influences": 5,
-    "Meaningful goals": 5,
-    "Valuable experiences": 5,
-    "Conscious living": 5,
-    "Impactful decisions": 5,
-    "Affirmative choices": 5,
-    "Balanced lifestyle": 5,
-    "Healthy habits": 5,
-    "Positive affirmations": 5,
-    "Encouraging feedback": 5,
-    "Transformational relationships": 5,
-    "Supportive community": 5,
-    "Holistic well-being": 5,
-    "Self-awareness": 5,
-    "Joyful existence": 5,
-    "Constructive mindset": 5,
-    "Hopeful outlook": 5,
-    "Empathetic engagement": 5,
-    "Spiritual growth": 5,
-    "Heartfelt connections": 5,
-    "Resilient mindset": 5,
-    "Empowering choices": 5,
-    "Life balance": 5,
-    "Transformative actions": 5,
-    "Positive legacy": 5,
-    "Emotional intelligence": 5,
-    "Mindset shift": 5,
-    "Fulfillment": 5,
-    "Collaborative efforts": 5,
-    "Healthy relationships": 5,
-    "Emotional support": 5,
-    "Joyful living": 5,
-    "Life enrichment": 5,
-    "Positive experiences": 5,
-    "Gracious living": 5,
-    "Empowered living": 5,
-    "Contributing positively": 5,
-    "Encouraging self-talk": 5,
-    "Gratifying experiences": 5,
-    "Life transformation": 5,
-    "best book in my entire life":5,
-    "i'm happy":5,
-    "I'm happy":5
-    
-};
+        const keywords = {
+            "krishna": 5,
+            "bhagavad gita": 5,
+            "hindu mythology": 5,
+            "radha krishna": 5,
+            "vrindavan": 5,
+            "karma": 5,
+            "dharma": 5,
+            "krishna leela": 5,
+            "divine play": 5,
+            "incarnation": 5,
+            "vishnu": 5,
+        };
 
-const greetings = [
-    "hi",
-    "hello",
-    "good morning",
-    "good afternoon",
-    "good evening",
-    "hey",
-    "what's up"
-];
+        const greetings = [
+            "hi",
+            "hello",
+            "good morning",
+            "good afternoon",
+            "good evening",
+            "hey",
+            "what's up"
+        ];
 
-// Function to check if a word is a greeting
-const isGreeting = (word) => {
-    return greetings.includes(word.toLowerCase());
-};
+        // Function to check if a word is a greeting
+        const isGreeting = (word) => {
+            return greetings.includes(word.toLowerCase());
+        };
 
-// Function to create or get the user document
-const createUserDocument = async (user) => {
-    const userRef = doc(db, "users", user.uid);
-    const snapshot = await getDoc(userRef);
-    if (!snapshot.exists()) {
-        await setDoc(userRef, {
-            comments: [],
-            points: 0 // Initialize points
-        });
-    }
-};
-
-submitButton.addEventListener("click", async () => {
-    const user = auth.currentUser;
-    const commentText = commentInput.value.trim();
-
-    if (user && commentText) {
-        try {
-            // Split the comment into words
-            const words = commentText.split(/\s+/);
-            let points = 0; // Start with 0 points
-
-            // Calculate points only for keywords and greetings
-            for (const word of words) {
-                const lowerWord = word.toLowerCase();
-                if (keywords[lowerWord]) {
-                    points += keywords[lowerWord]; // Add keyword points
-                } else if (isGreeting(lowerWord)) {
-                    points += 1; // Add 1 point for each greeting
-                }
-            }
-
+        // Function to create or get the user document
+        const createUserDocument = async (user) => {
             const userRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userRef); // Fetch current user document
-            const currentPoints = userDoc.data().points || 0; // Get current points
+            const snapshot = await getDoc(userRef);
+            if (!snapshot.exists()) {
+                await setDoc(userRef, {
+                    comments: [],
+                    points: 0 // Initialize points
+                });
+            }
+        };
 
-            await updateDoc(userRef, {
-                comments: arrayUnion({
-                    text: commentText,
-                    timestamp: new Date(),
-                }),
-                points: currentPoints + points // Update points
-            });
-            commentInput.value = ""; // Clear the input field
-        } catch (error) {
-            console.error("Error adding comment: ", error);
-        }
-    } else {
-        console.log("User is not authenticated or comment is empty.");
-    }
-});
+        submitButton.addEventListener("click", async () => {
+            const user = auth.currentUser;
+            const commentText = commentInput.value.trim();
 
-// Fetch comments and points
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        createUserDocument(user); // Ensure user document exists
-        const userRef = doc(db, "users", user.uid);
-        onSnapshot(userRef, (doc) => {
-            commentsList.innerHTML = ""; // Clear the list before displaying
-            const comments = doc.data().comments || [];
-            comments.forEach((comment) => {
-                const li = document.createElement("li");
-                li.className = "comment";
-                
-                // Replace spaces with non-breaking spaces and newlines with <br>
-                const formattedComment = comment.text.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>');
-                
-                li.innerHTML = formattedComment; // Use innerHTML to preserve formatting
-                commentsList.appendChild(li);
-            });
+            if (user && commentText) {
+                try {
+                    let points = 0; // Start with 0 points
+
+                    // Check for keywords
+                    for (const keyword in keywords) {
+                        if (commentText.toLowerCase().includes(keyword)) {
+                            points += keywords[keyword]; // Add keyword points
+                        }
+                    }
+
+                    // Check for greetings and add points
+                    const words = commentText.split(/\s+/);
+                    for (const word of words) {
+                        if (isGreeting(word)) {
+                            points += 5; // Add 5 points for each greeting
+                        }
+                    }
+
+                    const userRef = doc(db, "users", user.uid);
+                    const userDoc = await getDoc(userRef); // Fetch current user document
+                    const currentPoints = userDoc.data().points || 0; // Get current points
+
+                    await updateDoc(userRef, {
+                        comments: arrayUnion({
+                            text: commentText,
+                            timestamp: new Date(), // Store the current date and time
+                        }),
+                        points: currentPoints + points // Update points
+                    });
+                    commentInput.value = ""; // Clear the input field
+                } catch (error) {
+                    console.error("Error adding comment: ", error);
+                }
+            } else {
+                console.log("User is not authenticated or comment is empty.");
+            }
         });
-    }
-});
+
+        // Fetch comments and points
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                createUserDocument(user); // Ensure user document exists
+                const userRef = doc(db, "users", user.uid);
+                onSnapshot(userRef, (doc) => {
+                    commentsList.innerHTML = ""; // Clear the list before displaying
+                    const comments = doc.data().comments || [];
+                    comments.forEach((comment) => {
+                        const li = document.createElement("li");
+                        li.className = "comment";
+
+                        // Format the timestamp
+                        const timestamp = comment.timestamp.toDate(); // Convert Firestore timestamp to JavaScript Date
+                        const day = String(timestamp.getDate()).padStart(2, '0');
+                        const month = String(timestamp.getMonth() + 1).padStart(2, '0');
+                        const year = timestamp.getFullYear();
+                        let hours = timestamp.getHours();
+                        const minutes = String(timestamp.getMinutes()).padStart(2, '0');
+
+                        // Determine AM or PM suffix
+                        const amPm = hours >= 12 ? 'PM' : 'AM';
+                        // Convert to 12-hour format
+                        hours = hours % 12 || 12; // Convert 0 to 12 for midnight
+
+                        const formattedDate = `${day}/${month}/${year}`;
+                        const formattedTime = `${hours}:${minutes} ${amPm}`;
+
+                        // Format comment text
+                        const formattedComment = comment.text.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>');
+
+                        // Combine comment and formatted date
+                        li.innerHTML = `<span class="timestamp">(${formattedDate} ${formattedTime})</span> ${formattedComment}`;
+                        commentsList.appendChild(li);
+                    });
+                });
+            }
+        });

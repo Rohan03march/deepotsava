@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="./assets/img/iskcon-fevicon.png" rel="icon">
+    <link href="../assets/img/iskcon-fevicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,15 +23,15 @@
 
     
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,78 +43,46 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
+        <a href="../index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="../assets/img/iskcon-bangalore-logo-black.png" alt="">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="indexs.html" class="nav-item nav-link">Back</a>
-                <a href="index.html" class="nav-item nav-link">Logout</a>
+                <a href="../indexs.html" class="nav-item nav-link">Back</a>
+                <a href="" class="nav-item nav-link">Logout</a>
             </div>
         </div>
     </nav>
     <!-- Navbar End -->
 
     <body>
-        <h1>Offer a Ghee Lamp to the Lord</h1>
-       
-        <div class="container">
-            <div class="text">
-                <p style="color:black;font-size:24px">
-                    <b> Offering a ghee lamp to Lord Damodara </b> is a vital part of the <b> Deepotsava celebrations </b> during the sacred month of Kartika. This act of devotion attracts immense blessings from the Lord and brings abundant spiritual rewards, as described in the scriptures.
-                </p>
-                <p style="color:black;font-size:24px">
-                   <b> Offer a ghee lamp with devotion to the Deity or to a picture of Lord Krishna, Vishnu, or any of His incarnations, such as Lord Rama or Narasimha </b>. <br/> You may also recite the Damodarashtakam while offering the lamp.
-                </p>
-                <p style="color:black;font-size:24px">
-                   <b> Let us know how you celebrated Deepotsava by uploading a photo of offering a ghee lamp. </b>
-                </p>
-            </div>
-            <div class="UploadImage">
-                <h1 style="color: black;">Upload Image</h1>
-                <div id="dropZone">
-                    <img src="assets/images/image.png" alt="Upload Icon" />
-                    <p style="color:black;font-size:20px">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
-                </div>
-                <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
-                <p id="status" style="color:rgb(0, 0, 0);"></p>
-                <div id="progressContainer" style="display: none;">
-                    <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
-                    <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
-                </div>
-            </div>
+        <h1>Feed a Cow</h1>
+        <p style="text-align: center; color:black;font-size:24px">
+            In Vedic civilisation, cows hold a revered place. Cow protection promotes harmony with nature and supports spiritual progress.
+        </p>
+        <p style="text-align: center;color:black;font-size:24px">
+            Lord Krishna, also known as Gopala, the protector of cows, demonstrated the importance of cow protection during His pastimes as a cowherd.
+        </p>
+        <p style="text-align: center;color:black;font-size:24px">
+           <b> Let us know how you served mother cow by uploading a photo of your act of service. </b>
+        </p>
+    <div class="UploadImage">
+        <h1 style="color: black;">Upload Image</h1>
+        <div id="dropZone">
+            <img src="../assets/images/image.png" alt="Upload Icon" />
+            <p style="color:black">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
         </div>
-        
-        <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .text, .UploadImage {
-            flex: 1;
-            padding: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            .text {
-                order: 1;
-                text-align: center;
-            }
-            .UploadImage {
-                order: 2;
-            }
-        }
-        </style>
-         
-
-    <div id="imageGrid"></div>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
+        <p id="status" style="color:rgb(0, 0, 0);"></p>
+        <div id="progressContainer" style="display: none;">
+            <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
+            <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
+        </div>
+        <div id="imageGrid"></div>
+    </div>
     
     
     <!--style for upload image-->
@@ -139,7 +107,7 @@
         #dropZone {
             border: 2px dashed black;
             border-radius: 10px;
-            padding:100px;
+            padding:20px;
             text-align: center;
             transition: background-color 0.3s;
             margin: 0 auto;
@@ -147,13 +115,6 @@
             cursor: pointer;
             position: relative;
         }
-          
-        @media (max-width: 768px) {
-           #dropZone {
-            padding: 30px;
-           }
-        }
-
         #dropZone:hover {
             background-color: transparent;
         }
@@ -236,7 +197,7 @@
     
     
       <!--imports-->
-    <script type="module" src="./assets/js/indexss.js"></script>
+    <script type="module" src="../assets/js/indexss.js"></script>
     
       <!--disable this page 
     <script>
@@ -266,18 +227,18 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/parallax/parallax.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/counterup/counterup.min.js"></script>
+    <script src="../lib/parallax/parallax.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
   
 
     <!-- Template Javascript -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

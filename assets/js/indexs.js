@@ -29,6 +29,8 @@ const checkDownloadStatus = async (userId) => {
 };
 
 // Function to handle downloads
+
+// Function to handle downloads
 const handleDownload = async (manualKey, filePath) => {
     const userId = localStorage.getItem("loggedInUserId");
 
@@ -36,6 +38,7 @@ const handleDownload = async (manualKey, filePath) => {
         // Check download status
         const hasDownloaded = await checkDownloadStatus(userId);
         if (hasDownloaded) {
+            alert("You have already downloaded the manual."); // Optionally alert the user
             return; // Exit if the user has already downloaded
         }
 
@@ -58,8 +61,8 @@ const handleDownload = async (manualKey, filePath) => {
             // Hide the download section permanently
             document.getElementById("download").style.display = "none";
             // Show the Grid section
-            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
-            document.getElementById("Grids").style.display = "block"; // Assuming 'block' is the desired display style
+            document.getElementById("Grid").style.display = "block";
+            document.getElementById("Grids").style.display = "block";
         }, 5000);
     } else {
         alert("Please log in to download the manual."); // Handle case where user is not logged in
@@ -74,8 +77,8 @@ if (userId) {
             // Hide the download section permanently if already downloaded
             document.getElementById("download").style.display = "none";
             // Show the Grid section
-            document.getElementById("Grid").style.display = "block"; // Assuming 'block' is the desired display style
-            document.getElementById("Grids").style.display = "block"; // Assuming 'block' is the desired display style
+            document.getElementById("Grid").style.display = "block";
+            document.getElementById("Grids").style.display = "block";
         }
     });
 }
@@ -88,15 +91,16 @@ document.getElementById("downloadKannada").addEventListener("click", (event) => 
 
 document.getElementById("downloadHindi").addEventListener("click", (event) => {
     event.preventDefault();
-    handleDownload("downloadHindi", ".assets/PDF/Damodara-Vrata Hindi.pdf");
+    handleDownload("downloadHindi", "./assets/PDF/Damodara-Vrata Hindi.pdf");
 });
 
 document.getElementById("downloadEnglish").addEventListener("click", (event) => {
     event.preventDefault();
-    handleDownload("downloadEnglish", ".assets/PDF/Damodara-Vrata English.pdf");
+    handleDownload("downloadEnglish", "./assets/PDF/Damodara-Vrata English.pdf");
 });
 
 document.getElementById("downloadTelugu").addEventListener("click", (event) => {
     event.preventDefault();
-    handleDownload("downloadTelugu", ".assets/PDF/Damodara-Vrata Telegu.pdf");
+    handleDownload("downloadTelugu", "./assets/PDF/Damodara-Vrata Telugu.pdf");
 });
+
