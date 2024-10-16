@@ -256,34 +256,7 @@
                 <div class="days" id="days"></div>
             </div>
             <div id="dynamic-text" class="dynamic-text"></div>
-        </div>
-        <!-- Calendar -->
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="image-container" style="display: none;">
-                        <img src="assets/img/daily activities.jpg" alt="Image 1" class="img-fluid">
-                        <div class="overlay">
-                            <h2 style="color:white;text-align:center">Hare Krishna Maha Mantra</h2>
-                            <a href="./HareKrishnaMantra.html" class="btn btn-primary">Participate</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="image-container">
-                        <img src="assets/img/daily activities.jpg" alt="Image 2" class="img-fluid">
-                        <div class="overlay">
-                            <h2 style="color: white;">Bonus Activity</h2>
-                        </div>
-                    </div>
-                    <div class="button-container">
-                        <a id="participate-button" class="btn btn-primary">Participate</a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <script>
+             <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const monthYear = document.getElementById('month-year');
                 const daysContainer = document.getElementById('days');
@@ -397,118 +370,147 @@
                 renderCalendar(currentDate);
             });
         </script>
-        <style>
-            .con {
-                font-family: Arial, sans-serif;
-                display: grid;
-                place-items: center;
-                margin: 0;
-            }
-            .calendar {
-                background-color: #111111;
-                border-radius: 10px;
-                box-shadow: 0 0 30px #222222;
-                overflow: hidden;
-                width: 300px;
-                color: white;
-                padding: 20px;
-            }
-            .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px;
-            }
-            .btn {
-                cursor: pointer;
-            }
-            #month-year {
-                font-weight: bold;
-                font-size: 20px;
-            }
-            .weekdays, .days {
-                display: flex;
-                flex-wrap: wrap;
-            }
-            .days {
-                height: 240px;
-            }
-            .weekdays div, .days div {
-                width: 14.28%;
-                text-align: center;
-                padding: 10px 0;
-                border-radius: 5px;
-            }
-            .days div {
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .days div:hover {
-                background-color: white;
-                color: blue;
-                height: 50px;
-            }
-            .days .today {
-                background-color: blue;
-                color: white;
-                height: 50px;
-            }
-            .days .fade {
-                color: #555;
-            }
-            .dynamic-text {
-                margin-top: 20px;
-                color: black;
-                text-align: center;
-                font-size: 50px;
-            }
-            /* Button styles */
-            .event-button {
-                background-color: transparent;
-                color: white;
-                border: none;
-                cursor: pointer;
-                padding: 5px 10px;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            .event-button:hover {
-                color: black;
-            }
-            .image-container {
-                position: relative;
-                overflow: hidden;
-                border-radius: 20px;
-            }
-            .image-container img {
-                width: 100%;
-                height: auto;
-                transition: transform 0.3s ease;
-            }
-            .image-container:hover img {
-                transform: scale(1.1);
-            }
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(63, 25, 6, 0.7);
-                color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-            .image-container:hover .overlay {
-                opacity: 1;
-            }
-            .btn-primary {
-                margin-top: 10px;
-            }
-        </style>
+            <style>
+                .con {
+                    font-family: Arial, sans-serif;
+                    display: grid;
+                    place-items: center;
+                    margin: 0;
+                }
+                .calendar {
+                    background-color: #111111;
+                    border-radius: 10px;
+                    box-shadow: 0 0 30px #222222;
+                    overflow: hidden;
+                    width: 300px;
+                    color: white;
+                    padding: 20px;
+                }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px;
+                }
+                .btn {
+                    cursor: pointer;
+                }
+                #month-year {
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+                .weekdays, .days {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                .days {
+                    height: 240px;
+                }
+                .weekdays div, .days div {
+                    width: 14.28%;
+                    text-align: center;
+                    padding: 10px 0;
+                    border-radius: 5px;
+                }
+                .days div {
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                .days div:hover {
+                    background-color: white;
+                    color: blue;
+                    height: 50px;
+                }
+                .days .today {
+                    background-color: blue;
+                    color: white;
+                    height: 50px;
+                }
+                .days .fade {
+                    color: #555;
+                }
+                .dynamic-text {
+                    margin-top: 20px;
+                    color: black;
+                    text-align: center;
+                    font-size: 50px;
+                }
+                /* Button styles */
+                .event-button {
+                    background-color: transparent;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+                .event-button:hover {
+                    color: black;
+                }
+                .image-container {
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 20px;
+                }
+                .image-container img {
+                    width: 100%;
+                    height: auto;
+                    transition: transform 0.3s ease;
+                }
+                .image-container:hover img {
+                    transform: scale(1.1);
+                }
+                .overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(63, 25, 6, 0.7);
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+                .image-container:hover .overlay {
+                    opacity: 1;
+                }
+                .btn-primary {
+                    margin-top: 10px;
+                }
+            </style>
+        </div>
+        <!-- Calendar -->
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="image-container" style="display: none;">
+                        <img src="assets/img/daily activities.jpg" alt="Image 1" class="img-fluid">
+                        <div class="overlay">
+                            <h2 style="color:white;text-align:center">Hare Krishna Maha Mantra</h2>
+                            <a href="./HareKrishnaMantra.html" class="btn btn-primary">Participate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="image-container">
+                        <img src="assets/img/daily activities.jpg" alt="Image 2" class="img-fluid">
+                        <div class="overlay">
+                            <h2 style="color: white;">Bonus Activity</h2>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a id="participate-button" class="btn btn-primary">Participate</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+       
+       
     </div>
 
     
