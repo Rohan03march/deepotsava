@@ -74,7 +74,7 @@
                         document.getElementById("download").style.display = "none";
                         document.getElementById("Grid").style.display = "block";
                         document.getElementById("Grids").style.display = "block";
-                        document.getElementById("manual").style.display = "block";
+                        document.getElementById("sec").style.display = "block";
                     }, 5000);
                 } else {
                     alert("Please log in to download the manual.");
@@ -91,7 +91,7 @@
                             document.getElementById("download").style.display = "none";
                             document.getElementById("Grid").style.display = "block";
                             document.getElementById("Grids").style.display = "block";
-                            document.getElementById("manual").style.display = "block";
+                            document.getElementById("sec").style.display = "block";
                         }
                     });
                 }
@@ -129,7 +129,7 @@ window.onload = () => {
                 document.getElementById("download").style.display = "none";
                 document.getElementById("Grid").style.display = "block";
                 document.getElementById("Grids").style.display = "block";
-                document.getElementById("manual").style.display = "block";
+                document.getElementById("sec").style.display = "block";
             }
         });
 
