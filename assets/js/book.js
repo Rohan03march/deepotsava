@@ -59,7 +59,7 @@ const createUserDocument = async (user) => {
     if (!snapshot.exists()) {
         await setDoc(userRef, {
             comments: [],
-            points: 0 // Initialize points
+            commentPoints: 0 // Initialize commentPoints
         });
     }
 };
@@ -68,8 +68,8 @@ const createUserDocument = async (user) => {
 const updatePointsDisplay = async (user) => {
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
-    const points = userDoc.data().points || 0;
-    totalPoints.innerText = `Total Points: ${points}`;
+    const commentPoints = userDoc.data().commentPoints || 0; // Fetch commentPoints
+    totalPoints.innerText = `Total Points: ${commentPoints}`;
 };
 
 submitButton.addEventListener("click", async () => {
@@ -97,14 +97,14 @@ submitButton.addEventListener("click", async () => {
 
             const userRef = doc(db, "users", user.uid);
             const userDoc = await getDoc(userRef); // Fetch current user document
-            const currentPoints = userDoc.data().points || 0; // Get current points
+            const currentCommentPoints = userDoc.data().commentPoints || 0; // Get current commentPoints
 
             await updateDoc(userRef, {
                 comments: arrayUnion({
                     text: commentText,
                     timestamp: new Date(), // Store the current date and time
                 }),
-                points: currentPoints + points // Update points
+                commentPoints: currentCommentPoints + points // Update commentPoints
             });
 
             // Update points display after submitting a comment

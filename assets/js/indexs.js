@@ -109,8 +109,8 @@ const fetchUserPoints = async (userId) => {
     if (userDoc.exists()) {
         const data = userDoc.data();
         const imagePoints = data.imagePoints || 0; // Default to 0 if not present
-        const points = data.points || 0; // Default to 0 if not present
-        const totalPoints = imagePoints + points;
+        const points = data.commentPoints || 0; // Default to 0 if not present
+        const totalPoints = imagePoints + points ;
         
         // Display total points
         document.getElementById("totalPoints").innerText = `Total Points: ${totalPoints}`;
