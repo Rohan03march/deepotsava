@@ -61,37 +61,34 @@
     <body>
         <h1>Offer a Ghee Lamp to the Lord</h1>
        
-    <div class="container">
-        <div class="text">
-            <p style="color:black;font-size:24px">
-                <b> Offering a ghee lamp to Lord Damodara </b> is a vital part of the <b> Deepotsava celebrations </b> during the sacred month of Kartika. This act of devotion attracts immense blessings from the Lord and brings abundant spiritual rewards, as described in the scriptures.
-            </p>
-            <p style="color:black;font-size:24px">
-               <b> Offer a ghee lamp with devotion to the Deity or to a picture of Lord Krishna, Vishnu, or any of His incarnations, such as Lord Rama or Narasimha </b>. <br/> You may also recite the Damodarashtakam while offering the lamp.
-            </p>
-            <p style="color:black;font-size:24px">
-               <b> Let us know how you celebrated Deepotsava by uploading a photo of offering a ghee lamp. </b>
-            </p>
-        </div>
-        <div class="UploadImage">
-            <h1 style="color: black;">Upload Image</h1>
-            <div id="dropZone">
-                <img src="assets/images/image.png" alt="Upload Icon" />
-                <p style="color:black;font-size:20px">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
+        <div class="container">
+            <div class="text">
+                <p style="color:black;font-size:24px">
+                    <b> Offering a ghee lamp to Lord Damodara </b> is a vital part of the <b> Deepotsava celebrations </b> during the sacred month of Kartika. This act of devotion attracts immense blessings from the Lord and brings abundant spiritual rewards, as described in the scriptures.
+                </p>
+                <p style="color:black;font-size:24px">
+                   <b> Offer a ghee lamp with devotion to the Deity or to a picture of Lord Krishna, Vishnu, or any of His incarnations, such as Lord Rama or Narasimha </b>. <br/> You may also recite the Damodarashtakam while offering the lamp.
+                </p>
+                <p style="color:black;font-size:24px">
+                   <b> Let us know how you celebrated Deepotsava by uploading a photo of offering a ghee lamp. </b>
+                </p>
             </div>
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
-            <p id="status" style="color:rgb(0, 0, 0);"></p>
-            <div id="progressContainer" style="display: none;">
-                <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
-                <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
+            <div class="UploadImage">
+                <h1 style="color: black;">Upload Image</h1>
+                <div id="dropZone">
+                    <img src="assets/images/image.png" alt="Upload Icon" />
+                    <p style="color:black;font-size:20px">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple />
+                <p id="status" style="color:rgb(0, 0, 0);"></p>
+                <div id="progressContainer" style="display: none;">
+                    <div id="progressBar" style="width: 0%; height: 20px; background-color: blue; transition: width 0.5s;"></div>
+                    <div id="progressText" style="text-align: center; margin-top: 5px; font-weight: bold; color:black">0%</div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div id="imageGrid"></div>
-    
-    
-    <style>
+        
+        <style>
         .container {
             display: flex;
             justify-content: space-between;
@@ -101,70 +98,91 @@
             flex: 1;
             padding: 20px;
         }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .text {
+                order: 1;
+                text-align: center;
+            }
+            .UploadImage {
+                order: 2;
+            }
+        }
+        </style>
+         
 
+    <div id="imageGrid"></div>
+    
+    
+    <!--style for upload image-->
+    <style>
         .UploadImage {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto', sans-serif; /* Use Roboto font */
             background-color: transparent;
             padding: 20px;
         }
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
         }
-
+    
         .clickToUpload {
-            color: black;
+            color:black;
         }
         .clickToUpload:hover {
             color: blue;
             text-decoration: underline;
         }
-
         #dropZone {
             border: 2px dashed black;
             border-radius: 10px;
-            padding: 100px;
+            padding:100px;
             text-align: center;
+            transition: background-color 0.3s;
             margin: 0 auto;
             width: 80%;
             cursor: pointer;
             position: relative;
         }
+          
+        @media (max-width: 768px) {
+           #dropZone {
+            padding: 30px;
+           }
+        }
 
-        #progressContainer {
-            width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
+        #dropZone:hover {
+            background-color: transparent;
+        }
+        #dropZone img {
+            width: 50px; /* Icon size */
+            height: auto;
+            margin-bottom: 10px;
+        }
+        #status {
             text-align: center;
-            border-radius: 20px;
+            margin-top: 10px;
+            color: #555;
         }
-
-        #progressBar {
-            background-color: blue;
-            transition: width 0.5s ease;
-            border-radius: 20px;
-        }
-
         #imageGrid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-top: 20px;
         }
-
         .imageContainer {
             position: relative;
             border-radius: 10px;
             overflow: hidden;
         }
-
         .imageContainer img {
             width: 100%;
             height: auto;
             border-radius: 5px;
         }
-
         .deleteButton {
             position: absolute;
             top: 5px;
@@ -176,190 +194,39 @@
             border-radius: 5px;
             padding: 5px 10px;
         }
-
-        /* Responsive styles */
+        #progressContainer {
+            width: 100%;
+            max-width: 400px; /* Limit the width of the progress bar */
+            margin: 20px auto; /* Center the container */
+            text-align: center; /* Center text within the container */
+            border-radius: 20px;
+        }
+        
+        #progressBar {
+            background-color: blue; /* Initial color */
+            transition: width 0.5s ease; /* Smooth transition for the width */
+            border-radius: 20px;
+        }
+        
         @media (max-width: 900px) {
             #imageGrid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
             }
         }
         
         @media (max-width: 600px) {
             #imageGrid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for phones */
             }
         }
         
         @media (max-width: 400px) {
             #imageGrid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* 1 column for small phones */
             }
         }
     </style>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
-            authDomain: "iskcon-contest-3bf89.firebaseapp.com",
-            projectId: "iskcon-contest-3bf89",
-            storageBucket: "iskcon-contest-3bf89.appspot.com",
-            messagingSenderId: "216348940232",
-            appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
-            measurementId: "G-CJJLTTHHFJ"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-
-        let userId;
-
-        document.addEventListener("DOMContentLoaded", () => {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    userId = user.uid;
-                    await loadImages("uploadImage");
-                } else {
-                    window.location.href = "login.html"; // Redirect if not logged in
-                }
-            });
-
-            document.getElementById("dropZone").addEventListener("click", () => {
-                document.getElementById("fileInput").click();
-            });
-
-            document.getElementById("fileInput").addEventListener("change", (e) => {
-                handleFiles(e.target.files);
-            });
-
-            async function handleFiles(files) {
-                for (let file of files) {
-                    if (!file.type.startsWith("image/")) {
-                        continue;
-                    }
-
-                    const originalName = file.name.split(".")[0];
-                    const extension = file.name.split(".").pop();
-                    const newFileName = `${originalName}_${Date.now()}.${extension}`;
-
-                    const storageRef = ref(storage, `${userId}/${newFileName}`);
-                    const uploadTask = uploadBytesResumable(storageRef, file);
-
-                    const progressContainer = document.getElementById("progressContainer");
-                    const progressBar = document.getElementById("progressBar");
-                    const progressText = document.getElementById("progressText");
-                    progressContainer.style.display = "block";
-
-                    uploadTask.on(
-                        "state_changed",
-                        (snapshot) => {
-                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            progressBar.style.width = `${progress}%`;
-                            progressText.innerText = `${Math.floor(progress)}%`;
-                        },
-                        (error) => {
-                            document.getElementById("status").innerText = "Upload failed: " + error.message;
-                            progressContainer.style.display = "none";
-                        },
-                        async () => {
-                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                            const imageObject = { 
-                                url: downloadURL, 
-                                name: newFileName, 
-                                timestamp: new Date().toLocaleString(),
-                                source: "uploadImage"
-                            };
-
-                            const userDocRef = doc(db, "users", userId);
-                            await updateDoc(userDocRef, {
-                                images: arrayUnion(imageObject),
-                                imagePoints: increment(10),
-                            });
-
-                            displayImage(imageObject);
-                            progressContainer.style.display = "none";
-                        }
-                    );
-                }
-            }
-
-            async function loadImages(source) {
-                const userDocRef = doc(db, "users", userId);
-                const userDoc = await getDoc(userDocRef);
-
-                if (userDoc.exists()) {
-                    const images = userDoc.data().images || [];
-                    const filteredImages = images.filter(image => image.source === source);
-                    console.log("Loaded images:", filteredImages); // Debug log
-                    filteredImages.forEach((image) => {
-                        displayImage(image);
-                    });
-                }
-            }
-
-            function displayImage(image) {
-                const imageGrid = document.getElementById("imageGrid");
-
-                const imageContainer = document.createElement("div");
-                imageContainer.classList.add("imageContainer");
-
-                const img = document.createElement("img");
-                img.src = image.url;
-                img.alt = image.name;
-
-                console.log("Displaying image:", image); // Debug log
-
-                const formattedDate = formatDate(new Date(image.timestamp));
-                const timestamp = document.createElement("p");
-                timestamp.innerText = `Uploaded on: ${formattedDate}`;
-                timestamp.style.fontSize = "15px";
-                timestamp.style.textAlign = "center";
-                timestamp.style.color = "black";
-                timestamp.style.fontWeight = "bold";
-
-                const deleteButton = document.createElement("button");
-                deleteButton.innerText = "Delete";
-                deleteButton.classList.add("deleteButton");
-
-                deleteButton.addEventListener("click", async () => {
-                    const storageRef = ref(storage, `${userId}/${image.name}`);
-                    try {
-                        await deleteObject(storageRef);
-                        const userDocRef = doc(db, "users", userId);
-                        await updateDoc(userDocRef, {
-                            images: arrayRemove(image),
-                            imagePoints: increment(-10),
-                        });
-                        imageGrid.removeChild(imageContainer);
-                    } catch (error) {
-                        alert("Error deleting image: " + error.message);
-                    }
-                });
-
-                imageContainer.appendChild(img);
-                imageContainer.appendChild(timestamp);
-                imageContainer.appendChild(deleteButton);
-                imageGrid.appendChild(imageContainer);
-            }
-
-            function formatDate(date) {
-                const options = { 
-                    day: '2-digit', 
-                    month: '2-digit', 
-                    year: 'numeric', 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    hour12: true 
-                };
-                return new Intl.DateTimeFormat('en-IN', options).format(date);
-            }
-        });
-    </script>
+    <!--style for upload image-->
     
     </div>
     <!--/Upload Image section -->
