@@ -1,4 +1,3 @@
-
             // Import Firebase SDKs
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
             import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
@@ -75,6 +74,7 @@
                         document.getElementById("download").style.display = "none";
                         document.getElementById("Grid").style.display = "block";
                         document.getElementById("Grids").style.display = "block";
+                        document.getElementById("manual").style.display = "block";
                     }, 5000);
                 } else {
                     alert("Please log in to download the manual.");
@@ -91,6 +91,7 @@
                             document.getElementById("download").style.display = "none";
                             document.getElementById("Grid").style.display = "block";
                             document.getElementById("Grids").style.display = "block";
+                            document.getElementById("manual").style.display = "block";
                         }
                     });
                 }
@@ -98,4 +99,41 @@
     
             // Add event listener for the download button
             document.getElementById("downloadLink").addEventListener("click", handleDownload);
+
+
+            // Function to fetch user points and calculate total points
+const fetchUserPoints = async (userId) => {
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+    
+    if (userDoc.exists()) {
+        const data = userDoc.data();
+        const imagePoints = data.imagePoints || 0; // Default to 0 if not present
+        const points = data.points || 0; // Default to 0 if not present
+        const totalPoints = imagePoints + points;
         
+        // Display total points
+        document.getElementById("totalPoints").innerText = `Total Points: ${totalPoints}`;
+    } else {
+        console.log("User document does not exist.");
+    }
+};
+
+// Call fetchUserPoints on page load if user is logged in
+window.onload = () => {
+    updateManual(); // Ensure the image is set on page load
+    const userId = localStorage.getItem("loggedInUserId");
+    if (userId) {
+        checkDownloadStatus(userId).then(hasDownloaded => {
+            if (hasDownloaded) {
+                document.getElementById("download").style.display = "none";
+                document.getElementById("Grid").style.display = "block";
+                document.getElementById("Grids").style.display = "block";
+                document.getElementById("manual").style.display = "block";
+            }
+        });
+
+        // Fetch user points
+        fetchUserPoints(userId);
+    }
+};
