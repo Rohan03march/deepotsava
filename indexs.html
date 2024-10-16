@@ -56,71 +56,49 @@
         </div>
     </nav>
     <!-- Navbar End -->
-    <!-- Team Start -->
     <div class="container-xxl py-5" id="download">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 style="color:#3F1906">Download</h1>
                 <h2 style="color: #3F1906;">Kartika Deepotsava Manual</h2>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item rounded">
-                        <img class="img-fluid" src="./assets/img/Screenshot 2024-10-09 192237.png" alt="">
-                        <div class="team-text">
-                            <h4 class="mb-0">Damodara Vrata Manual</h4>
-                            <p class="text-primary">In Kannada</p>
-                            <div class="team-social d-flex">
-                                <a href="./assets/PDF/Damodara-Vrata Kannada.pdf" class="btn btn-primary" download id="downloadKannada">Download</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item rounded">
-                        <img class="img-fluid" src="./assets/img/Damo-Vrata hindi.jpg" alt="">
-                        <div class="team-text">
-                            <h4 class="mb-0">Damodara Vrata Manual</h4>
-                            <p class="text-primary">In Hindi</p>
-                            <div class="team-social d-flex">
-                                <a href="#" class="btn btn-primary" download id="downloadHindi">Download</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item rounded">
-                        <img class="img-fluid" src="./assets/img/Screenshot 2024-10-09 192214.png" alt="">
-                        <div class="team-text">
-                            <h4 class="mb-0">Damodara Vrata Manual</h4>
-                            <p class="text-primary">In English</p>
-                            <div class="team-social d-flex">
-                                <a href="./assets/PDF/Damodara-Vrata English.pdf" class="btn btn-primary" download id="downloadEnglish">Download</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item rounded">
-                        <img class="img-fluid" src="./assets/img/Screenshot 2024-10-14 110543.png" alt="">
-                        <div class="team-text">
-                            <h4 class="mb-0">Damodara Vrata Manual</h4>
-                            <p class="text-primary">In Telugu</p>
-                            <div class="team-social d-flex">
-                                <a href="./assets/PDF/Damodara-Vrata Telegu.pdf" class="btn btn-primary" download id="downloadTelugu">Download</a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="text-center mb-4">
+                <img id="manualImage" class="img-fluid" src="./assets/img/Screenshot 2024-10-09 192237.png" alt="Damodara Vrata Manual">
+            </div>
+            <div class="text-center mb-4">
+                <div class="d-flex justify-content-center">
+                    <select id="languageSelect" class="form-select" onchange="updateManual()">
+                        <option value="kannada" data-image="./assets/img/Screenshot 2024-10-09 192237.png" data-pdf="./assets/PDF/Damodara-Vrata Kannada.pdf">Kannada</option>
+                        <option value="hindi" data-image="./assets/img/Damo-Vrata hindi.jpg" data-pdf="./assets/PDF/Damodara-Vrata Hindi.pdf">Hindi</option>
+                        <option value="english" data-image="./assets/img/Screenshot 2024-10-09 192214.png" data-pdf="./assets/PDF/Damodara-Vrata English.pdf">English</option>
+                        <option value="telugu" data-image="./assets/img/Screenshot 2024-10-14 110543.png" data-pdf="./assets/PDF/Damodara-Vrata Telugu.pdf">Telugu</option>
+                    </select>
                 </div>
             </div>
+            <div class="text-center">
+                <button id="downloadLink" class="btn btn-primary">Download</button>
+            </div>
         </div>
+        <style>
+            .d-flex {
+                display: flex;
+                justify-content: center; /* Center items horizontally */
+            }
+            .form-select {
+                display: block;
+                width: 50%; /* Width of the dropdown */
+                padding: .375rem 2.25rem .375rem .75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #525368;
+                background-color: #fff;
+            }
+        </style>
+        <!-- Imports -->
+        <script type="module" src="./assets/js/indexs.js"></script>
     </div>
-    <script type="module" src="./assets/js/indexs.js"></script>
-    <!-- Team End -->
-
+    
     <div class="container-xl py-4" id="Grid" style="display: none;">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -283,16 +261,16 @@
                 const dynamicTexts = {
                     "2024-10-17": { text: "Quiz", url: "Quiz.html" },
                     "2024-10-18": { text: "Watch lecture", url: "lecture.html" },
-                    "2024-10-19": { text: "Learn Slockas", url: "slockas.html" },
+                    "2024-10-19": { text: "Learn a Shloka", url: "Shloka.html" },
                     "2024-10-20": { text: "Quiz", url: "Quiz.html" },
                     "2024-10-21": { text: "Listen to Keertan", url: "keertan.html" },
                     "2024-10-22": { text: "Cooking", url: "cooking.html" },
                     "2024-10-23": { text: "Quiz", url: "Quiz.html" },
-                    "2024-10-24": { text: "Learn Slockas", url: "slockas.html" },
+                    "2024-10-24": { text: " Learn a Shloka", url: "Shloka.html" },
                     "2024-10-25": { text: "Watch Lecture", url: "lecture.html" },
                     "2024-10-26": { text: "Visit to temple", url: "temple.html" },
                     "2024-10-27": { text: "Listen to Keertan", url: "keertan.html" },
-                    "2024-10-28": { text: "Learn Slockas", url: "slockas.html" },
+                    "2024-10-28": { text: "Learn a Shloka", url: "Shloka.html" },
                     "2024-10-29": { text: "Quiz", url: "Quiz.html" },
                     "2024-10-30": { text: "Write a letter to Krishna", url: "krishna.html" },
                     "2024-10-31": { text: "Listen to Keertan", url: "keertan.html" },
@@ -300,14 +278,14 @@
                     "2024-11-02": { text: "Quiz", url: "Quiz.html" },
                     "2024-11-03": { text: "Feed the cow", url: "cowfeed.html" },
                     "2024-11-04": { text: "Watering tulsi plant", url: "tulsi.html" },
-                    "2024-11-05": { text: "Learn Slockas", url: "slockas.html" },
+                    "2024-11-05": { text: "Learn a Shloka", url: "Shloka.html" },
                     "2024-11-06": { text: "Quiz", url: "Quiz.html" },
                     "2024-11-07": { text: "Watch Lecture", url: "lecture.html" },
                     "2024-11-08": { text: "Goverdhan puja day", url: "pujaday.html" },
                     "2024-11-09": { text: "Quiz", url: "Quiz.html" },
                     "2024-11-10": { text: "Write a letter to Krishna", url: "krishna.html" },
                     "2024-11-11": { text: "Listen to Keertan", url: "keertan.html" },
-                    "2024-11-12": { text: "Learn Slockas", url: "slockas.html" },
+                    "2024-11-12": { text: "Learn a Shloka", url: "Shloka.html" },
                     "2024-11-13": { text: "Express your gratitude", url: "Gratitude.html" },
                     "2024-11-14": { text: "Quiz", url: "Quiz.html" },
                     "2024-11-15": { text: "Write your experience about the past days and changes", url: "Experience.html" }

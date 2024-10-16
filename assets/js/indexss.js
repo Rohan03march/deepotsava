@@ -1,190 +1,164 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  increment,
-  onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-  uploadBytesResumable,
-} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
 
-// Your Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
-  authDomain: "iskcon-contest-3bf89.firebaseapp.com",
-  projectId: "iskcon-contest-3bf89",
-  storageBucket: "iskcon-contest-3bf89.appspot.com",
-  messagingSenderId: "216348940232",
-  appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
-  measurementId: "G-CJJLTTHHFJ"
-};
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, increment } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+        const firebaseConfig = {
+            apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
+            authDomain: "iskcon-contest-3bf89.firebaseapp.com",
+            projectId: "iskcon-contest-3bf89",
+            storageBucket: "iskcon-contest-3bf89.appspot.com",
+            messagingSenderId: "216348940232",
+            appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
+            measurementId: "G-CJJLTTHHFJ"
+        };
 
-let userId;
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Handle authentication state
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      userId = user.uid;
-      await loadImages(); // Load images after user is authenticated
-    } else {
-      window.location.href = "index.html"; // Redirect if not logged in
-    }
-  });
+        let userId;
 
-  document.getElementById("dropZone").addEventListener("click", () => {
-    document.getElementById("fileInput").click();
-  });
+        document.addEventListener("DOMContentLoaded", () => {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    userId = user.uid;
+                    await loadImages("uploadImage");
+                } else {
+                    window.location.href = "login.html"; // Redirect if not logged in
+                }
+            });
 
-  document.getElementById("dropZone").addEventListener("dragover", (e) => {
-    e.preventDefault();
-    document.getElementById("dropZone").style.backgroundColor = "#e8f0ff";
-  });
+            document.getElementById("dropZone").addEventListener("click", () => {
+                document.getElementById("fileInput").click();
+            });
 
-  document.getElementById("dropZone").addEventListener("dragleave", () => {
-    document.getElementById("dropZone").style.backgroundColor = "";
-  });
+            document.getElementById("fileInput").addEventListener("change", (e) => {
+                handleFiles(e.target.files);
+            });
 
-  document.getElementById("dropZone").addEventListener("drop", (e) => {
-    e.preventDefault();
-    document.getElementById("dropZone").style.backgroundColor = "";
-    handleFiles(e.dataTransfer.files);
-  });
+            async function handleFiles(files) {
+                for (let file of files) {
+                    if (!file.type.startsWith("image/")) {
+                        continue;
+                    }
 
-  document.getElementById("fileInput").addEventListener("change", (e) => {
-    handleFiles(e.target.files);
-  });
+                    const originalName = file.name.split(".")[0];
+                    const extension = file.name.split(".").pop();
+                    const newFileName = `${originalName}_${Date.now()}.${extension}`;
 
-  async function handleFiles(files) {
-    for (let file of files) {
-      if (!file.type.startsWith("image/")) {
-        continue;
-      }
+                    const storageRef = ref(storage, `${userId}/${newFileName}`);
+                    const uploadTask = uploadBytesResumable(storageRef, file);
 
-      const originalName = file.name.split(".")[0];
-      const extension = file.name.split(".").pop();
-      const newFileName = `${originalName}_${Date.now()}.${extension}`;
+                    const progressContainer = document.getElementById("progressContainer");
+                    const progressBar = document.getElementById("progressBar");
+                    const progressText = document.getElementById("progressText");
+                    progressContainer.style.display = "block";
 
-      const storageRef = ref(storage, `${userId}/${newFileName}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+                    uploadTask.on(
+                        "state_changed",
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            progressBar.style.width = `${progress}%`;
+                            progressText.innerText = `${Math.floor(progress)}%`;
+                        },
+                        (error) => {
+                            document.getElementById("status").innerText = "Upload failed: " + error.message;
+                            progressContainer.style.display = "none";
+                        },
+                        async () => {
+                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                            const imageObject = { 
+                                url: downloadURL, 
+                                name: newFileName, 
+                                timestamp: new Date().toLocaleString(),
+                                source: "uploadImage"
+                            };
 
-      const progressContainer = document.getElementById("progressContainer");
-      const progressBar = document.getElementById("progressBar");
-      const progressText = document.getElementById("progressText");
-      progressContainer.style.display = "block";
+                            const userDocRef = doc(db, "users", userId);
+                            await updateDoc(userDocRef, {
+                                images: arrayUnion(imageObject),
+                                imagePoints: increment(10),
+                            });
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progressBar.style.width = `${progress}%`;
-          progressText.innerText = `${Math.floor(progress)}%`;
+                            displayImage(imageObject);
+                            progressContainer.style.display = "none";
+                        }
+                    );
+                }
+            }
 
-          if (progress < 100) {
-            progressBar.style.backgroundColor = "blue";
+            async function loadImages(source) {
+                const userDocRef = doc(db, "users", userId);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    const images = userDoc.data().images || [];
+                    const filteredImages = images.filter(image => image.source === source);
+                    filteredImages.forEach((image) => {
+                        displayImage(image);
+                    });
+                }
+            }
+
+            function displayImage(image) {
+              const imageGrid = document.getElementById("imageGrid");
+          
+              const imageContainer = document.createElement("div");
+              imageContainer.classList.add("imageContainer");
+          
+              const img = document.createElement("img");
+              img.src = image.url;
+              img.alt = image.name;
+          
+              // Format the date and time
+              const formattedDate = formatDate(new Date(image.timestamp));
+          
+              const timestamp = document.createElement("p");
+              timestamp.innerText = `Uploaded on: ${formattedDate}`;
+              timestamp.style.fontSize = "15px";
+              timestamp.style.textAlign = "center";
+              timestamp.style.color = "black"; // Set color to black
+              timestamp.style.fontWeight = "bold"; // Make the text bold
+          
+              const deleteButton = document.createElement("button");
+              deleteButton.innerText = "Delete";
+              deleteButton.classList.add("deleteButton");
+          
+              deleteButton.addEventListener("click", async () => {
+                  const storageRef = ref(storage, `${userId}/${image.name}`);
+                  try {
+                      await deleteObject(storageRef);
+                      const userDocRef = doc(db, "users", userId);
+                      await updateDoc(userDocRef, {
+                          images: arrayRemove(image),
+                          imagePoints: increment(-10),
+                      });
+                      imageGrid.removeChild(imageContainer);
+                  } catch (error) {
+                      alert("Error deleting image: " + error.message);
+                  }
+              });
+          
+              imageContainer.appendChild(img);
+              imageContainer.appendChild(timestamp);
+              imageContainer.appendChild(deleteButton);
+              imageGrid.appendChild(imageContainer);
           }
-        },
-        (error) => {
-          document.getElementById("status").innerText = "Upload failed: " + error.message;
-          progressContainer.style.display = "none";
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          document.getElementById("status").innerText = "Upload successful!";
-          progressBar.style.backgroundColor = "green";
-          progressText.innerText = "100%";
-
-          const imageObject = { 
-            url: downloadURL, 
-            name: newFileName, 
-            timestamp: new Date().toLocaleString() // Add timestamp here
-          };
-
-          const userDocRef = doc(db, "users", userId);
-          await updateDoc(userDocRef, {
-            images: arrayUnion(imageObject),
-            imagePoints: increment(10),
-          });
-
-          displayImage(imageObject);
-          progressContainer.style.display = "none";
-        }
-      );
-    }
-  }
-
-  async function loadImages() {
-    const userDocRef = doc(db, "users", userId);
-    const userDoc = await getDoc(userDocRef);
-
-    if (userDoc.exists()) {
-      const images = userDoc.data().images || [];
-      images.forEach((image) => {
-        displayImage(image);
-      });
-    }
-  }
-
-  function displayImage(image) {
-    const imageGrid = document.getElementById("imageGrid");
-
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("imageContainer");
-
-    const img = document.createElement("img");
-    img.src = image.url;
-    img.alt = image.name;
-
-    const timestamp = document.createElement("p");
-    timestamp.innerText = `Uploaded on: ${image.timestamp}`; // Display timestamp
-    timestamp.style.fontSize = "15px";
-    timestamp.style.textAlign = "center";
-    timestamp.style.color = "black";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
-    deleteButton.classList.add("deleteButton");
-
-    deleteButton.addEventListener("click", async () => {
-      const storageRef = ref(storage, `${userId}/${image.name}`);
-      try {
-        await deleteObject(storageRef);
-        const userDocRef = doc(db, "users", userId);
-        await updateDoc(userDocRef, {
-          images: arrayRemove(image),
-          imagePoints: increment(-10),
+          
+          
+          function formatDate(date) {
+              const options = { 
+                  day: '2-digit', 
+                  month: '2-digit', 
+                  year: 'numeric', 
+                  hour: '2-digit', 
+                  minute: '2-digit', 
+                  hour12: true 
+              };
+              return new Intl.DateTimeFormat('en-IN', options).format(date);
+          }
         });
-
-        imageGrid.removeChild(imageContainer);
-      } catch (error) {
-        alert("Error deleting image: " + error.message);
-      }
-    });
-
-    imageContainer.appendChild(img);
-    imageContainer.appendChild(timestamp); // Append timestamp below the image
-    imageContainer.appendChild(deleteButton);
-    imageGrid.appendChild(imageContainer);
-  } 
-});
+    
