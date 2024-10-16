@@ -397,7 +397,7 @@
             </select>
             <br/>
             <div class="button-container">
-                <button id="download-btn">Download</button>
+                <button id="download-btn" class="d">Download</button>
             </div>
         </div>
     
@@ -457,7 +457,7 @@
                 margin-top: 10px;
             }
     
-            button {
+            .d {
                 padding: 10px 20px;
                 font-size: 16px;
                 background-color: #007bff;
@@ -468,17 +468,17 @@
                 transition: background-color 0.3s, transform 0.2s;
             }
     
-            button:hover {
+            .d:hover {
                 background-color: #0056b3;
                 transform: scale(1.05);
             }
     
-            button:active {
+            .d:active {
                 transform: scale(0.95);
             }
     
             @media (max-width: 600px) {
-                button {
+                .d {
                     width: 100%;
                 }
                 select {
