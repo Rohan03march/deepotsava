@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user) {
       userId = user.uid;
       await loadImages(); // Load images after user is authenticated
+      await updatePointsDisplay(); // Display initial points
     } else {
       window.location.href = "index.html"; // Redirect if not logged in
     }
@@ -128,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
 
           displayImage(imageObject);
+          await updatePointsDisplay(); // Update points display after upload
           progressContainer.style.display = "none";
         }
       );
@@ -143,6 +145,16 @@ document.addEventListener("DOMContentLoaded", () => {
       images.forEach((image) => {
         displayImage(image);
       });
+    }
+  }
+
+  async function updatePointsDisplay() {
+    const userDocRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+      const imagePoints = userDoc.data().imagePoints || 0;
+      document.getElementById("totalPoints").innerText = `Total Points: ${imagePoints}`;
     }
   }
 
@@ -177,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         imageGrid.removeChild(imageContainer);
+        await updatePointsDisplay(); // Update points display after deletion
       } catch (error) {
         alert("Error deleting image: " + error.message);
       }
@@ -186,5 +199,5 @@ document.addEventListener("DOMContentLoaded", () => {
     imageContainer.appendChild(timestamp); // Append timestamp below the image
     imageContainer.appendChild(deleteButton);
     imageGrid.appendChild(imageContainer);
-  } 
+  }
 });

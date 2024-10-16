@@ -54,6 +54,48 @@
                 <a href="indexs.html" class="nav-item nav-link">Back</a>
                 <a href="index.html" class="nav-item nav-link">Logout</a>
             </div>
+            <div class="points-container">
+                <a style="color: black; font-size:20px" id="totalPoints"></a>
+            </div>
+            <style>
+                .points-container {
+                    display: inline-block; /* Align with the content */
+                    padding: 10px 20px; /* Add padding around the text */
+                    border-radius: 10px; /* Rounded corners */
+                    position: relative; /* Positioning for animation */
+                    overflow: hidden; /* Hide overflow for the animation effect */
+                    font-size: 20px;
+                    color: black;
+                }
+                
+                .points-container::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(270deg, rgba(78, 1, 1, 0.5), rgba(189, 189, 20, 0));
+                    animation: slide 5s linear infinite; /* Animation duration and type */
+                    z-index: 0; /* Place it behind the text */
+                    opacity: 0.7; /* Semi-transparent background */
+                }
+                
+                @keyframes slide {
+                    0% {
+                        transform: translateX(-100%);
+                    }
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+                
+                #totalPoints {
+                    position: relative; /* Ensure the text is above the animated background */
+                    z-index: 1; /* Place it above the background */
+                }
+                
+            </style>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -174,6 +216,43 @@
     }
 </style>
 
+<!-- Copyright Start -->
+      <!-- Added justify-content-center -->
+      <div class="col-12 text-center mb-3" style="color: black;">
+        <h5 class="mt-4">Share This Contest</h5>
+        <div class="share-buttons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://deepotsava.netlify.app/" target="_blank" class="btn btn-primary">Share on Facebook</a>
+            <a href="https://twitter.com/intent/tweet?url=https://deepotsava.netlify.app/" target="_blank" class="btn btn-info">Share on Twitter</a>
+            <a href="https://wa.me/?text=Check%20out%20this%20contest%20at%20https://deepotsava.netlify.app/ By%20ISKCON%20Bangalore%20for%20Deepotsava%20" target="_blank" class="btn btn-success">Share on WhatsApp</a>
+        </div>
+    </div>
+<style>
+.share-section {
+text-align: center; /* Center align text */
+}
+
+.social-icons {
+display: flex; /* Use flexbox for alignment */
+justify-content: center; /* Center the icons */
+margin: 10px 0; /* Add some margin */
+}
+
+.social-icons a {
+margin: 0 10px; /* Space between icons */
+}
+
+.share-buttons {
+margin-top: 20px; /* Space above buttons */
+display: flex; /* Use flexbox for alignment */
+justify-content: center; /* Center the buttons */
+}
+
+.share-buttons a {
+margin: 0 10px; /* Space between buttons */
+}
+
+</style>    
+<!-- Copyright End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
