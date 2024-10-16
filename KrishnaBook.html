@@ -217,6 +217,45 @@
 </style>
 
 
+<div class="manual" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <h1 style="margin-bottom: 10px;">Download Manual</h1>
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+        <select id="language-select" style="padding: 10px; font-size: 16px; border: 2px solid #007bff; border-radius: 5px;">
+            <option value="">Select Language</option>
+            <option value="./assets/PDF/Damodara-Vrata English.pdf">English</option>
+            <option value="./assets/PDF/">Hindi</option>
+            <option value="./assets/PDF/Damodara-Vrata Kannada.pdf">Kannada</option>
+            <option value="./assets/PDF/Damodara-Vrata Telegu.pdf">Telugu</option>
+        </select>
+        <button id="download-btn" class="d" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Download</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('download-btn').addEventListener('click', function() {
+        const select = document.getElementById('language-select');
+        const selectedValue = select.value;
+        if (selectedValue) {
+            const link = document.createElement('a');
+            link.href = selectedValue;
+            link.download = selectedValue.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert('Please select a language.');
+        }
+    });
+</script>
+
+<style>
+    @media (max-width: 600px) {
+        .manual > div {
+            flex-direction: column; /* Stack vertically on mobile */
+        }
+    }
+</style>
+
 <!-- Copyright Start -->
       <!-- Added justify-content-center -->
       <div class="col-12 text-center mb-3" style="color: black;">
