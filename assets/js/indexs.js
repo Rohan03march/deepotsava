@@ -3,7 +3,8 @@
             import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
             import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
             import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-    
+    import { onSnapshot } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
             // Firebase configuration
             const firebaseConfig = {
                 apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
@@ -120,8 +121,23 @@ const fetchUserPoints = async (userId) => {
 };
 
 // Call fetchUserPoints on page load if user is logged in
+// Function to fetch copyright text from Firestore
+const fetchCopyrightText = async () => {
+    const copyrightRef = doc(db, "settings", "copyright");
+    const copyrightDoc = await getDoc(copyrightRef);
+    
+    if (copyrightDoc.exists()) {
+        const copyrightText = copyrightDoc.data().text;
+        document.getElementById("copyrightText").innerHTML = copyrightText;
+    } else {
+        console.error("Copyright document does not exist.");
+    }
+};
+
+// Call fetchCopyrightText on page load
 window.onload = () => {
     updateManual(); // Ensure the image is set on page load
+    fetchCopyrightText(); // Fetch and set copyright text
     const userId = localStorage.getItem("loggedInUserId");
     if (userId) {
         checkDownloadStatus(userId).then(hasDownloaded => {
@@ -132,8 +148,24 @@ window.onload = () => {
                 document.getElementById("sec").style.display = "block";
             }
         });
-
-        // Fetch user points
         fetchUserPoints(userId);
     }
 };
+
+
+const updateButtonHref = () => {
+    const urlDoc = doc(db, "urls", "participateLink");
+    onSnapshot(urlDoc, (doc) => {
+        if (doc.exists()) {
+            const url = doc.data().link;
+            document.getElementById('participate-button').href = url;
+        } else {
+            console.error('No such document!');
+        }
+    }, (error) => {
+        console.error('Error fetching URL from Firestore:', error);
+    });
+};
+
+// Call the function to update the button when the script runs
+updateButtonHref();

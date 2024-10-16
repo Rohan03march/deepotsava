@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
@@ -162,3 +162,28 @@ onAuthStateChanged(auth, (user) => {
         });
     }
 });
+
+
+window.onload = function() {
+    const chapter1Title = document.getElementById('chapter1-title');
+    const chapter1Content = document.getElementById('chapter1-content');
+    const chapter2Title = document.getElementById('chapter2-title');
+    const chapter2Content = document.getElementById('chapter2-content');
+
+    const chaptersRef = collection(db, 'chapters');
+
+    // Listen for real-time updates
+    onSnapshot(chaptersRef, (snapshot) => {
+      snapshot.forEach((doc) => {
+        const chapterData = doc.data();
+        
+        if (doc.id === 'chapter1') {
+          chapter1Title.innerText = chapterData.title;
+          chapter1Content.innerText = chapterData.content;
+        } else if (doc.id === 'chapter2') {
+          chapter2Title.innerText = chapterData.title;
+          chapter2Content.innerText = chapterData.content;
+        }
+      });
+    });
+  };
