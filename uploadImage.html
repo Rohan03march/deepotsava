@@ -42,39 +42,57 @@
     <!-- Spinner End -->
 
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="./uploadImage.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="indexs.html" class="nav-item nav-link">Back</a>
-                <a href="index.html" class="nav-item nav-link">Logout</a>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+<nav class="navbar navbar-expand bg-white navbar-light sticky-top p-0"> <!-- Remove 'lg' -->
+    <a href="indexs.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
+    </a>
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <a href="indexs.html" class="nav-item nav-link" style="font-weight: bold;">Back</a>
+    </div>
+    <a href="index.html" style="color: black; font-weight:bold; font-size:18px" id="logout">Logout</a>
+    <style>
+        .points-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(270deg, rgba(78, 1, 1, 0.5), rgba(189, 189, 20, 0));
+            animation: slide 5s linear infinite; /* Animation duration and type */
+            z-index: 0; /* Place it behind the text */
+            opacity: 0.7; /* Semi-transparent background */
+        }
+        #logout {
+            position: relative; /* Ensure the text is above the animated background */
+            z-index: 1; /* Place it above the background */
+        }
+        @media (max-width: 767.98px) {
+            #logout {
+                padding-top: 2.1px;
+                font-weight: bold;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</nav>
+<!-- Navbar End -->
 
     <body>
-        <h1>Offer a Ghee Lamp to the Lord</h1>
+        <h1>Offer a Ghee Lamp to Domadara</h1>
        
         <div class="container">
             <div class="text">
-                <p style="color:black;font-size:24px">
+                <p style="color:black;font-size:24px;text-align:left">
                     <b> Offering a ghee lamp to Lord Damodara </b> is a vital part of the <b> Deepotsava celebrations </b> during the sacred month of Kartika. This act of devotion attracts immense blessings from the Lord and brings abundant spiritual rewards, as described in the scriptures.
                 </p>
-                <p style="color:black;font-size:24px">
+                <p style="color:black;font-size:24px;text-align:left">
                    <b> Offer a ghee lamp with devotion to the Deity or to a picture of Lord Krishna, Vishnu, or any of His incarnations, such as Lord Rama or Narasimha </b>. <br/> You may also recite the Damodarashtakam while offering the lamp.
-                </p>
-                <p style="color:black;font-size:24px">
-                   <b> Let us know how you celebrated Deepotsava by uploading a photo of offering a ghee lamp. </b>
                 </p>
             </div>
             <div class="UploadImage">
-                <h1 style="color: black;">Upload Image</h1>
+                <h1 style="color: black;">Upload a Photo of Offering 
+                    the Ghee Lamp</h1>
                 <div id="dropZone">
                     <img src="assets/images/image.png" alt="Upload Icon" />
                     <p style="color:black;font-size:20px">Drag and Drop to Upload Image <br/> OR  <br/><span class="clickToUpload">Click to upload</span> </p>

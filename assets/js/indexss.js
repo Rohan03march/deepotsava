@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imageGrid.removeChild(imageContainer);
         await updatePointsDisplay(); // Update points display after deletion
       } catch (error) {
-        alert("Error deleting image: " + error.message);
+        //alert("Error deleting image: " + error.message);
       }
     });
 

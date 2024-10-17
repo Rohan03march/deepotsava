@@ -41,18 +41,52 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
       <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <img src="./assets/img/iskcon-bangalore-logo-black.png" alt="">
-    </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">Sign Up</a>
-            </div>
-        </div>
-    </nav>
+          <img src="./assets/img/iskcon-bangalore-logo-black.png" alt="">
+      </a>
+      <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a href="index.html" class="nav-link active home-link">Home</a>
+          <a href="#" id="signup-link" class="nav-item nav-link signup-link">Sign Up</a>
+      </div>
+  </nav>
+<style>
+  @media (max-width: 767.98px) {
+    .navbar-nav {
+        display: flex;
+        flex-direction: row; /* Ensure items are in a row */
+    }
+    .home-link {
+      display: none;
+    }
+    .signup-link {
+      font-size: 50px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 15px; /* Adjust padding for better touch targets */
+    }
+}
+
+</style>  
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const signupLink = document.getElementById("signup-link");
+
+    function updateSignupLink() {
+        if (window.innerWidth < 768) {
+            signupLink.href = "#signup"; // Mobile
+        } else {
+            signupLink.href = "#about"; // Desktop
+        }
+    }
+
+    // Initial call to set the correct link
+    updateSignupLink();
+
+    // Update link on resize
+    window.addEventListener("resize", updateSignupLink);
+});
+
+</script>
     <!-- Navbar End -->
 
 
@@ -110,35 +144,16 @@
             <h1 style="color: #3F1906;">About Kartika Deepotsava</h1>
             <p class="mb-4" style="color: black;">ISKCON Bangalore is celebrating the Kartika Deepotsava festival from 17 October to 15 November 2024.</p>
             <p class="mb-4" style="color: black;">Deepotsava, also known as the Festival of Lights, is a month-long celebration commemorating Damodara-lila, the enchanting pastime of Lord Krishna stealing butter and being tied to a mortar by His loving mother Yashoda. The name 'Damodara' is derived from Sanskrit, where 'dama' means rope and 'udara' means belly, denoting Krishna bound by a rope.</p>
-                <p class="mb-4" style="color: black;">Kartika is revered as the most sacred month and is exceptionally dear to Lord Krishna. During this period, devotees adhere to strict vows (Damodara Vrata) and worship Lord Damodara by offering ghee lamps daily. The Padma Purana states: "Anyone who offers a ghee lamp to Lord Damodara in the month of Kartika will be freed from all kinds of sins and will attain the abode of Lord Hari."</p>
-            <div id="moreText" style="display: none;">
-                <p class="mb-4" style="color: black;">Every evening during Deepotsava, the temple hall is illuminated with hundreds of decorative lamps, emanating a transcendental radiance that elevates the spirit of devotion.</p>
-                <p class="mb-4" style="color: black;">The celebrations include an enthralling arati performed to Their Lordships, accompanied by the melodious rendition of the Damodarashtaka. This prayer beautifully glorifies the divine form of Lord Damodara and implores Him to grant His loving devotional service. Following the arati, all assembled devotees have the opportunity to offer ghee lamps to Lord Damodara and other Deities. The festivities conclude with an ecstatic shayana pallakki utsava.</p>
-                <p class="mb-4" style="color: black;">Participate in these spiritually enriching celebrations, offer a ghee lamp to Lord Damodara, and illuminate your heart with love and devotion for the Lord.</p>
-            </div>
-            <button id="toggleButton" onclick="toggleText()" style="background-color: #3F1906; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius:20px ; ">
-                Read More
-            </button>
+            <a href="https://www.iskconbangalore.org/deepotsava/"> 
+              <button id="toggleButton" style="background-color: #3F1906; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 20px;">
+                  Know More
+              </button>
+          </a>
+          
         </div>
-        
-        <script>
-        function toggleText() {
-            const moreText = document.getElementById("moreText");
-            const button = document.getElementById("toggleButton");
-            
-            if (moreText.style.display === "none") {
-                moreText.style.display = "block";
-                button.textContent = "Show Less";
-            } else {
-                moreText.style.display = "none";
-                button.textContent = "Show More";
-            }
-        }
-        </script>
-        
             <div class="col-lg-6">
                 <div class="row g-4 align-items-center">
-                  <div class="login-container" id="about">
+                  <div class="login-container" id="signup">
                     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"rel="stylesheet"/>
                     <div class="log-container">
                       <div class="signup-section">

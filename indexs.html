@@ -42,66 +42,46 @@
     <!-- Spinner End -->
 
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="indexs.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Logout</a>
-            </div>
-            <div class="points-container">
-                <a style="color: black; font-size:20px" id="totalPoints"></a>
-            </div>
-            <style>
-                .points-container {
-                    display: inline-block; /* Align with the content */
-                    padding: 10px 20px; /* Add padding around the text */
-                    border-radius: 10px; /* Rounded corners */
-                    position: relative; /* Positioning for animation */
-                    overflow: hidden; /* Hide overflow for the animation effect */
-                    font-size: 20px;
-                    color: black;
-                }
-                
-                .points-container::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: linear-gradient(270deg, rgba(78, 1, 1, 0.5), rgba(189, 189, 20, 0));
-                    animation: slide 5s linear infinite; /* Animation duration and type */
-                    z-index: 0; /* Place it behind the text */
-                    opacity: 0.7; /* Semi-transparent background */
-                }
-                
-                @keyframes slide {
-                    0% {
-                        transform: translateX(-100%);
-                    }
-                    100% {
-                        transform: translateX(100%);
-                    }
-                }
-                
-                #totalPoints {
-                    position: relative; /* Ensure the text is above the animated background */
-                    z-index: 1; /* Place it above the background */
-                }
-                
-            </style>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+<nav class="navbar navbar-expand bg-white navbar-light sticky-top p-0"> <!-- Remove 'lg' -->
+    <a href="indexs.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
+    </a>
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <a href="index.html" class="nav-item nav-link" style="font-weight: bold;">Logout</a>
+    </div>
+    <a style="color: black; font-weight:bold; font-size:18px" id="totalPoints"></a>
+    <style>
+        .points-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(270deg, rgba(78, 1, 1, 0.5), rgba(189, 189, 20, 0));
+            animation: slide 5s linear infinite; /* Animation duration and type */
+            z-index: 0; /* Place it behind the text */
+            opacity: 0.7; /* Semi-transparent background */
+        }
+        #totalPoints {
+            position: relative; /* Ensure the text is above the animated background */
+            z-index: 1; /* Place it above the background */
+        }
+        @media (max-width: 767.98px) {
+            #totalPoints {
+                padding-top: 3px;
+                font-weight: bold;
+            }
+        }
+    </style>
+</nav>
+<!-- Navbar End -->
+
     <div class="container-xxl py-5" id="download">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h3 style="color: #3F1906;">Download Kartika Deepotsava Manual</h3>
+                <h3 style="color: #3F1906;">Download Damodara Vrata Manual 
+                    in the Language of Your Preference</h3>
             </div>
             <div class="text-center mb-4">
                 <img id="manualImage" class="img-fluid" src="./assets/img/Screenshot 2024-10-09 192237.png" alt="Damodara Vrata Manual">
@@ -160,7 +140,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="image-container">
-                        <img src="assets/img/reading books.jpg" alt="Image 2" class="img-fluid">
+                        <img src="assets/img/reading books (1).jpg" alt="Image 2" class="img-fluid">
                         <div class="overlay">
                             <h2 style="color: white;">Reading Krishna Book</h2>
                         </div>
@@ -173,7 +153,8 @@
                     <div class="image-container">
                         <img src="assets/img/ghee lamp offering.jpg" alt="Image 3" class="img-fluid">
                         <div class="overlay">
-                            <h2 style="color: white;text-align:center">Offer Ghee To The Lord</h2>
+                            <h2 style="color: white;text-align:center">Offer a ghee lamp 
+                                to Lord Damodara</h2>
                         </div>
                     </div>
                     <div class="button-container">
@@ -230,16 +211,19 @@
         }
     </style>
 
+    
     <div class="container-xl py-4" id="Grids" style="display: none;">
+       
         <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h1 style="color: #3F1906;">Bonus Activity</h1>
+            <h1 style="color: #3F1906;">Bonus Activity</h1> <br/>
+            <p style="color:black;font-size:20px">Take part in a variety of activities—Quizzes, Shlokas, Kirtans, Cooking, and More—with unique daily challenges throughout this auspicious month and <b> earn bonus points</b>.</p>
         </div>
         <br/>
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="image-container" style="display: none;">
-                        <img src="assets/img/daily activities.jpg" alt="Image 1" class="img-fluid">
+                        <img src="assets/img/daily.jpg" alt="Image 1" class="img-fluid">
                         <div class="overlay">
                             <h2 style="color:white;text-align:center">Hare Krishna Maha Mantra</h2>
                             <a href="./HareKrishnaMantra.html" class="btn btn-primary">Participate</a>
@@ -248,7 +232,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="image-container">
-                        <img src="assets/img/daily activities.jpg" alt="Image 2" class="img-fluid">
+                        <img src="assets/img/daily.jpg" alt="Image 2" class="img-fluid">
                         <div class="overlay">
                             <h2 style="color: white;">Bonus Activity</h2>
                         </div>
