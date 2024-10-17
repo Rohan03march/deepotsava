@@ -77,7 +77,7 @@
 </nav>
 <!-- Navbar End -->
 </div> 
-<h1 style="text-align: center">Test your knowledge of Lord Krishna by <br/> taking part in this engaging quiz.</h1>
+<h1 style="text-align: center">Test your knowledge of Lord Krishna<br/> by taking part in this engaging quiz.</h1>
     <style>
         .text-container {
             color: black;
@@ -99,9 +99,17 @@
     </style>
     
     <div class="text-container">
-        <p>
-        </p>
+        <img src="./assets/img/puzzle.jpg" alt="Puzzle Image">
+        <style>
+            img {
+                border-radius: 20px;
+                width: 100%; /* Make the image responsive */
+                height: auto; /* Maintain aspect ratio */
+                max-width: 600px; /* Optional: Set a maximum width */
+            }
+        </style>
     </div>
+    
     
 
 <h2 style="color: black;text-align:center">
@@ -140,7 +148,7 @@
     const auth = getAuth(app);
     const db = getFirestore();
 
-    const correctAnswers = ["rohan", "rohan ", "option a", "option A"]; 
+    const correctAnswers = ["NARADA","narada"]; 
     let userPoints = 0; // Initialize user points
 
     document.addEventListener("DOMContentLoaded", () => {

@@ -128,50 +128,135 @@
         }
         .books {
             display: flex;
+            justify-content: center;
             max-width: 800px;
             margin: auto;
             border: 2px solid #ccc;
             border-radius: 10px;
             overflow: hidden;
             background: white;
+            position: relative; /* For positioning arrows */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .page {
             flex: 1;
             padding: 20px;
-            border-right: 1px solid #ccc;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
+            transition: transform 0.6s; /* Smooth transition for page turning */
+            transform-origin: left; /* Set the origin for turning */
         }
-        .page:last-child {
-            border-right: none;
+        .page.right {
+            transform-origin: right; /* Set origin for the right page */
         }
-        h2 {
-            margin-top: 0;
+        .left-arrow, .right-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 30px;
+            color: #333;
+            user-select: none;
+            z-index: 10;
         }
-        
+        .left-arrow {
+            left: 10px;
+        }
+        .right-arrow {
+            right: 10px;
+        }
+
         /* Media query for mobile devices */
         @media (max-width: 600px) {
             .books {
                 flex-direction: column;
             }
             .page {
-                border-right: none; /* Remove right border on mobile */
+                box-shadow: none; /* Remove shadow for mobile */
+            }
+            .left-arrow, .right-arrow {
+                font-size: 20px; /* Smaller arrows for mobile */
             }
         }
     </style>
 
     <div class="books">
-        <div class="page">
+        <div class="arrow left-arrow" onclick="prevPage()">&#10094;</div>
+
+        <div class="page" id="left-page">
             <h2 id="chapter1-title"></h2>
             <p id="chapter1-content"></p>
         </div>
-        
-        <div class="page">
+
+        <div class="page right" id="right-page">
             <h2 id="chapter2-title"></h2>
             <p id="chapter2-content"></p>
         </div>
+
+        <div class="arrow right-arrow" onclick="nextPage()">&#10095;</div>
     </div>
 </div>
+
+<script>
+    const chapters = [
+        { title: "Yashoda", content: "Content of Chapter 1" },
+        { title: "Chapter 2", content: "Content of Chapter 2" },
+        { title: "Chapter 3", content: "Content of Chapter 3" },
+        { title: "Chapter 4", content: "Content of Chapter 4" },
+        { title: "Chapter 5", content: "Content of Chapter 5" },
+        { title: "Chapter 6", content: "Content of Chapter 6" },
+        { title: "Chapter 7", content: "Content of Chapter 7" },
+        { title: "Chapter 8", content: "Content of Chapter 8" },
+        { title: "Chapter 9", content: "Content of Chapter 9" },
+        { title: "Chapter 10", content: "Content of Chapter 10" },
+        { title: "Chapter 11", content: "Content of Chapter 11" },
+        { title: "Chapter 12", content: "Content of Chapter 12" },
+        { title: "Chapter 13", content: "Content of Chapter 13" },
+        { title: "Chapter 14", content: "Content of Chapter 14" },
+        { title: "Chapter 15", content: "Content of Chapter 15" },
+        { title: "Chapter 16", content: "Content of Chapter 16" },
+        { title: "Chapter 17", content: "Content of Chapter 17" },
+        { title: "Chapter 18", content: "Content of Chapter 18" },
+        { title: "Chapter 19", content: "Content of Chapter 19" },
+        { title: "Chapter 20", content: "Content of Chapter 20" }
+    ];
+
+    let currentPage = 0;
+
+    function updatePage() {
+        const leftChapter = chapters[currentPage] || { title: "", content: "" };
+        const rightChapter = chapters[currentPage + 1] || { title: "", content: "" }; // Next chapter or blank
+
+        document.getElementById('chapter1-title').innerText = leftChapter.title;
+        document.getElementById('chapter1-content').innerText = leftChapter.content;
+        
+        document.getElementById('chapter2-title').innerText = rightChapter.title;
+        document.getElementById('chapter2-content').innerText = rightChapter.content;
+
+        // Disable arrows if at the beginning or end
+        document.querySelector('.left-arrow').style.display = currentPage === 0 ? 'none' : 'block';
+        document.querySelector('.right-arrow').style.display = currentPage >= chapters.length - 2 ? 'none' : 'block';
+    }
+
+    function nextPage() {
+        if (currentPage < chapters.length - 2) { // Change condition for pairs
+            currentPage += 2; // Move two chapters forward
+            updatePage();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 0) {
+            currentPage -= 2; // Move two chapters back
+            updatePage();
+        }
+    }
+
+    // Initialize page
+    updatePage();
+</script>
+
+
 
 <div class="book">
     <div class="container">
