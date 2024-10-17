@@ -114,7 +114,7 @@ const fetchUserPoints = async (userId) => {
         const totalPoints = imagePoints + points ;
         
         // Display total points
-        document.getElementById("totalPoints").innerText = `Points: ${totalPoints}`;
+        document.getElementById("totalPoints").innerText = `Total Points: ${totalPoints}`;
     } else {
         console.log("User document does not exist.");
     }
