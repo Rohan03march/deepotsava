@@ -42,7 +42,7 @@
                 if (imagePath) {
                     manualImage.src = imagePath;
                 } else {
-                    manualImage.src = './assets/img/Screenshot 2024-10-14 110543.png'; // Default image path
+                    manualImage.src = './assets/img/book.jpeg'; // Default image path
                 }
             };
     
