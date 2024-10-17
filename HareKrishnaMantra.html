@@ -87,50 +87,65 @@
             <p style="text-align: left; color: black; font-size: 24px; font-family: 'Roboto', sans-serif;">
                 <b>Chant 108 times</b>, preferably with a japa mala, while listening to this recording of <br/> <b>Srila Prabhupada (Founder-Acharya of ISKCON)</b> chanting the Hare Krishna Mahamantra.
             </p>
-            <label class="chant-label">
-                <input type="checkbox" id="chantCheckbox" class="chant-checkbox" /> 
-                I have chanted the mantra
-            </label>
-<style>
-    .chant-label {
-        display: flex;
-        align-items: center;
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        color: black;
-        cursor: pointer;
-    }
-    
-    .chant-checkbox {
-        appearance: none; /* Remove default styling */
-        width: 24px; /* Custom size */
-        height: 24px; /* Custom size */
-        border: 2px solid #4CAF50; /* Border color */
-        border-radius: 4px; /* Rounded corners */
-        margin-right: 10px; /* Space between checkbox and label text */
-        cursor: pointer;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-    
-    .chant-checkbox:checked {
-        background-color: #4CAF50; /* Background color when checked */
-        border-color: #4CAF50; /* Border color when checked */
-    }
-    
-    /* Optional: Add a checkmark */
-    .chant-checkbox:checked::after {
-        content: '';
-        position: absolute;
-        width: 8px;
-        height: 16px;
-        border: solid white;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-        left: 6px;
-        top: 10px;
-    }
-    
-</style>            
+            <div class="chant-container">
+                <label class="chant-label">
+                    <input type="checkbox" id="chantCheckbox" class="chant-checkbox" />
+                    I have chanted the mantra
+                </label>
+            </div>
+            
+            <style>
+                .chant-container {
+                    background-color: #f9f9f9; /* Light background color */
+                    border: 2px solid #4CAF50; /* Border color */
+                    border-radius: 12px; /* Curved corners */
+                    padding: 15px; /* Padding inside the box */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                    max-width: 400px; /* Max width for the container */
+                    margin: 20px auto; /* Center the container */
+                }
+            
+                .chant-label {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 24px;
+                    color: black;
+                    cursor: pointer;
+                }
+            
+                .chant-checkbox {
+                    appearance: none; /* Remove default styling */
+                    width: 24px; /* Custom size */
+                    height: 24px; /* Custom size */
+                    border: 2px solid #4CAF50; /* Border color */
+                    border-radius: 4px; /* Rounded corners */
+                    margin-right: 10px; /* Space between checkbox and label text */
+                    cursor: pointer;
+                    transition: background-color 0.3s, border-color 0.3s;
+                    position: relative; /* Position for checkmark */
+                }
+                
+                .chant-checkbox:checked {
+                    background-color: #4CAF50; /* Background color when checked */
+                    border-color: #4CAF50; /* Border color when checked */
+                }
+                
+                /* Adjusted checkmark */
+                .chant-checkbox:checked::after {
+                    content: '';
+                    position: absolute;
+                    width: 8px; /* Width of the checkmark */
+                    height: 14px; /* Height of the checkmark */
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                    left: 6px; /* Adjust this for horizontal centering */
+                    top: 5px; /* Adjust this for vertical centering */
+                }
+                
+            </style>
+                       
             <div id="message" style="color: green; font-size: 20px;"></div>
         </div>
         
