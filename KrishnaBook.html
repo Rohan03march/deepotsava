@@ -47,9 +47,9 @@
         <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
     </a>
     <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="indexs.html" class="nav-item nav-link" style="font-weight: bold;">Back</a>
+        <a href="indexs.html" class="nav-item nav-link" style="font-weight: bold;font-family: 'Roboto', sans-serif;">Back</a>
     </div>
-    <a href="index.html" style="color: black; font-weight:bold; font-size:18px" id="logout">Logout</a>
+    <a href="index.html" style="color: black; font-weight:bold; font-size:18px;font-family: 'Roboto', sans-serif;" id="logout">Logout</a>
     <style>
         .points-container::before {
             content: '';
@@ -77,7 +77,7 @@
 </nav>
 <!-- Navbar End -->
 </div> 
-<h1 style="text-align: center">Learn about the divine
+<h1 style="text-align: center;font-family: 'Roboto', sans-serif;">Learn about the divine
     pastimes of Lord Damodara</h1>
     <style>
         .text-container {
@@ -100,19 +100,19 @@
     </style>
     
     <div class="text-container">
-        <p>
+        <p style="font-family: 'Roboto', sans-serif;">
             “Krishna - The Supreme Personality of Godhead”, <br />
             <b>written by Srila Prabhupada (Founder-Acharya of ISKCON)</b>, <br />
             summarises the 10th Canto of the Srimad Bhagavatam.
         </p>
-        <p>
+        <p style="font-family: 'Roboto', sans-serif;">
             <b>It narrates Lord Krishna's divine pastimes</b>, which He performed on this earth <b>around 5,000 years ago</b>. <br />
             Regularly reading these pastimes fosters devotion in our hearts and keeps us connected with the Lord.
         </p>
     </div>
     
 
-<h2 style="color: black;text-align:center">
+<h2 style="color: black;text-align:center;font-family: 'Roboto', sans-serif;">
     <b>Share Your Learning Below and Earn Points</b>
 </h2>
 
@@ -271,13 +271,13 @@
 
 <div class="book">
     <div class="container">
-        <h1 style="color: black;">Today's Learning</h1>
-        <textarea id="commentInput" placeholder="Write today's learning here..." rows="4"></textarea>
-        <button class="submit" id="submitButton">Submit</button>
+        <h1 style="color: black;font-family: 'Roboto', sans-serif;">Today's Learning</h1>
+        <textarea id="commentInput" placeholder="Write your learning briefly from what you have read today and earn points..." rows="4"></textarea>
+        <button class="submit" id="submitButton" style="font-family: 'Roboto', sans-serif;">Submit</button>
     </div>
 
     <div id="commentsSection">
-        <h2 style="color: black; text-align:center">Learnings Submitted</h2>
+        <h2 style="color: black; text-align:center;font-family: 'Roboto', sans-serif;">Learnings Submitted</h2>
         <ul id="commentsList"></ul>
     </div>   
 </div>
@@ -311,7 +311,7 @@
 
     .submit {
         padding: 10px 15px;
-        background-color: #007bff;
+        background-color: #3F1906;
         color: white;
         border: none;
         border-radius: 4px;
@@ -370,16 +370,16 @@
 
 
 <div class="manual" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <h1 style="margin-bottom: 10px;">Download Manual</h1>
+    <h1 style="margin-bottom: 10px;font-family: 'Roboto', sans-serif;">Download Manual</h1>
     <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
-        <select id="language-select" style="padding: 10px; font-size: 16px; border: 2px solid #007bff; border-radius: 5px;">
+        <select id="language-select" style="padding: 10px; font-size: 16px; border: 2px solid #3F1906; border-radius: 5px;font-family: 'Roboto', sans-serif;">
             <option value="">Select Language</option>
             <option value="./assets/PDF/Damodara-Vrata English.pdf">English</option>
             <option value="./assets/PDF/Domadara Vrata Manual Hindi.pdf">Hindi</option>
             <option value="./assets/PDF/Damodara-Vrata Kannada.pdf">Kannada</option>
             <option value="./assets/PDF/Damodara-Vrata Telegu.pdf">Telugu</option>
         </select>
-        <button id="download-btn" class="d" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Download</button>
+        <button id="download-btn" class="d" style="padding: 10px 20px; font-size: 16px; background-color: #3F1906; color: white; border: none; border-radius: 5px; cursor: pointer;">Download</button>
     </div>
 </div>
 
@@ -413,9 +413,15 @@
       <div class="col-12 text-center mb-3" style="color: black;">
         <h5 class="mt-4">Share This Contest</h5>
         <div class="share-buttons">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://deepotsava.netlify.app/" target="_blank" class="btn btn-primary">Share on Facebook</a>
-            <a href="https://twitter.com/intent/tweet?url=https://deepotsava.netlify.app/" target="_blank" class="btn btn-info">Share on Twitter</a>
-            <a href="https://wa.me/?text=Check%20out%20this%20contest%20at%20https://deepotsava.netlify.app/ By%20ISKCON%20Bangalore%20for%20Deepotsava%20" target="_blank" class="btn btn-success">Share on WhatsApp</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://deepotsava.netlify.app/" target="_blank" style="background-color: #3b5998; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-facebook"></i> Share on Facebook
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=https://deepotsava.netlify.app/" target="_blank" style="background-color: #1DA1F2; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-twitter"></i> Share on Twitter
+            </a>
+            <a href="https://wa.me/?text=Check%20out%20this%20contest%20at%20https://deepotsava.netlify.app/%20By%20ISKCON%20Bangalore%20for%20Deepotsava" target="_blank" style="background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            </a>
         </div>
     </div>
 <style>

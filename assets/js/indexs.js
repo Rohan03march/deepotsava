@@ -112,7 +112,8 @@ const fetchUserPoints = async (userId) => {
         const imagePoints = data.imagePoints || 0; // Default to 0 if not present
         const points = data.commentPoints || 0; // Default to 0 if not present
         const answerpoints = data.Answerpoints || 0;
-        const totalPoints = imagePoints + points+answerpoints ;
+        const musicpoints = data.chantPoints || 0;
+        const totalPoints = imagePoints + points+answerpoints+musicpoints ;
         
         
         // Display total points
@@ -171,3 +172,6 @@ const updateButtonHref = () => {
 
 // Call the function to update the button when the script runs
 updateButtonHref();
+
+
+

@@ -49,9 +49,9 @@
         <img src="assets/img/iskcon-bangalore-logo-black.png" alt="">
     </a>
     <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="indexs.html" class="nav-item nav-link" style="font-weight: bold;">Back</a>
+        <a href="indexs.html" class="nav-item nav-link" style="font-weight: bold;font-family: 'Roboto', sans-serif;">Back</a>
     </div>
-    <a href="index.html" style="color: black; font-weight:bold; font-size:18px" id="totalPoints">Logout</a>
+    <a href="index.html" style="color: black; font-weight:bold; font-size:18px;font-family: 'Roboto', sans-serif;" id="totalPoints">Logout</a>
     <style>
         .points-container::before {
             content: '';
@@ -80,14 +80,121 @@
 <!-- Navbar End -->
     <div class="main-container">
         <div class="text-container">
-            <h1 style="text-align: left;">Chant the Hare Krishna Maha mantra</h1>
-            <p style="text-align: left; color:black;font-size:24px">
+            <h1 style="text-align: left; font-family: 'Roboto', sans-serif;">Chant the Hare Krishna Maha mantra</h1>
+            <p style="text-align: left; color: black; font-size: 24px; font-family: 'Roboto', sans-serif;">
                 Chanting and hearing the Hare Krishna Mahamantra is recommended in the scriptures as the most sublime and effective method of spiritual advancement in the current age of Kali-yuga. <br/> As you practice this daily, you will experience inner peace, happiness, and positivity.
             </p>
-            <p style="text-align: left; color:black;font-size:24px">
-               <b> Chant 108 times</b>, preferably with a japa mala, while listening to this recording of <br/> <b> Srila Prabhupada (Founder-Acharya of ISKCON)</b> chanting the Hare Krishna Mahamantra.
+            <p style="text-align: left; color: black; font-size: 24px; font-family: 'Roboto', sans-serif;">
+                <b>Chant 108 times</b>, preferably with a japa mala, while listening to this recording of <br/> <b>Srila Prabhupada (Founder-Acharya of ISKCON)</b> chanting the Hare Krishna Mahamantra.
             </p>
+            <label class="chant-label">
+                <input type="checkbox" id="chantCheckbox" class="chant-checkbox" /> 
+                I have chanted the mantra
+            </label>
+<style>
+    .chant-label {
+        display: flex;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        color: black;
+        cursor: pointer;
+    }
+    
+    .chant-checkbox {
+        appearance: none; /* Remove default styling */
+        width: 24px; /* Custom size */
+        height: 24px; /* Custom size */
+        border: 2px solid #4CAF50; /* Border color */
+        border-radius: 4px; /* Rounded corners */
+        margin-right: 10px; /* Space between checkbox and label text */
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    .chant-checkbox:checked {
+        background-color: #4CAF50; /* Background color when checked */
+        border-color: #4CAF50; /* Border color when checked */
+    }
+    
+    /* Optional: Add a checkmark */
+    .chant-checkbox:checked::after {
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 16px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        left: 6px;
+        top: 10px;
+    }
+    
+</style>            
+            <div id="message" style="color: green; font-size: 20px;"></div>
         </div>
+        
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+            import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+            import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        
+            const firebaseConfig = {
+                apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
+                authDomain: "iskcon-contest-3bf89.firebaseapp.com",
+                projectId: "iskcon-contest-3bf89",
+                storageBucket: "iskcon-contest-3bf89.appspot.com",
+                messagingSenderId: "216348940232",
+                appId: "1:216348940232:web:1c8de66866f589ce1f92fd",
+                measurementId: "G-CJJLTTHHFJ"
+            };
+        
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const auth = getAuth();
+            const db = getFirestore(app);
+        
+            const updatePointsOnCheckboxChange = async () => {
+                const userId = localStorage.getItem("loggedInUserId");
+                console.log("User ID:", userId); // Debugging log
+                if (userId) {
+                    const checkbox = document.getElementById("chantCheckbox");
+                    const userRef = doc(db, "users", userId);
+        
+                    const userDoc = await getDoc(userRef);
+                    let currentPoints = userDoc.exists() ? (userDoc.data().chantPoints || 0) : 0;
+        
+                    checkbox.checked = userDoc.exists() && userDoc.data().hasChanted;
+        
+                    checkbox.addEventListener('change', async () => {
+                        console.log("Checkbox changed. Checked:", checkbox.checked); // Debugging log
+                        if (checkbox.checked) {
+                            currentPoints += 10; // Add 10 points for checking the box
+                            await setDoc(userRef, { chantPoints: currentPoints, hasChanted: true }, { merge: true });
+                            document.getElementById("message").innerText = "You've gained 10 points for chanting!";
+                        } else {
+                            // Optional: Handle unchecking if you want to deduct points
+                            // currentPoints -= 10; // Uncomment if you want to deduct points
+                            // await setDoc(userRef, { chantPoints: currentPoints, hasChanted: false }, { merge: true });
+                            // document.getElementById("message").innerText = "You've lost points for unchecking.";
+                        }
+                    });
+                } else {
+                    alert("Please log in to earn points.");
+                }
+            };
+        
+            window.onload = async () => {
+                const userId = localStorage.getItem("loggedInUserId");
+                if (userId) {
+                    await updatePointsOnCheckboxChange();
+                }
+            };
+            
+        </script>
+        
+              
         
         <div class="music">
         
@@ -125,7 +232,7 @@
                 
                 .music{
                     margin: 0;
-                    font-family: 'Ubuntu', sans-serif;
+                    font-family: 'Roboto', sans-serif;;
                     font-size: 12px;
                     min-height: 100vh;
                     display: flex;
@@ -404,16 +511,16 @@
         
     </div>
     <div class="manual" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-        <h1 style="margin-bottom: 10px;">Download Manual</h1>
+        <h1 style="margin-bottom: 10px;font-family: 'Roboto', sans-serif;">Download Manual</h1>
         <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
-            <select id="language-select" style="padding: 10px; font-size: 16px; border: 2px solid #007bff; border-radius: 5px;">
+            <select id="language-select" style="padding: 10px; font-size: 16px; border: 2px solid #3F1906; border-radius: 5px;font-family: 'Roboto', sans-serif;">
                 <option value="">Select Language</option>
                 <option value="./assets/PDF/Damodara-Vrata English.pdf">English</option>
                 <option value="./assets/PDF/Domadara Vrata Manual Hindi.pdf">Hindi</option>
                 <option value="./assets/PDF/Damodara-Vrata Kannada.pdf">Kannada</option>
                 <option value="./assets/PDF/Damodara-Vrata Telegu.pdf">Telugu</option>
             </select>
-            <button id="download-btn" class="d" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Download</button>
+            <button id="download-btn" class="d" style="padding: 10px 20px; font-size: 16px; background-color: #3F1906; color: white; border: none; border-radius: 5px; cursor: pointer;font-family: 'Roboto', sans-serif;">Download</button>
         </div>
     </div>
     
@@ -448,9 +555,15 @@
       <div class="col-12 text-center mb-3" style="color: black;">
         <h5 class="mt-4">Share This Contest</h5>
         <div class="share-buttons">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://deepotsava.netlify.app/" target="_blank" class="btn btn-primary">Share on Facebook</a>
-            <a href="https://twitter.com/intent/tweet?url=https://deepotsava.netlify.app/" target="_blank" class="btn btn-info">Share on Twitter</a>
-            <a href="https://wa.me/?text=Check%20out%20this%20contest%20at%20https://deepotsava.netlify.app/ By%20ISKCON%20Bangalore%20for%20Deepotsava%20" target="_blank" class="btn btn-success">Share on WhatsApp</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://deepotsava.netlify.app/" target="_blank" style="background-color: #3b5998; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-facebook"></i> Share on Facebook
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=https://deepotsava.netlify.app/" target="_blank" style="background-color: #1DA1F2; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-twitter"></i> Share on Twitter
+            </a>
+            <a href="https://wa.me/?text=Check%20out%20this%20contest%20at%20https://deepotsava.netlify.app/%20By%20ISKCON%20Bangalore%20for%20Deepotsava" target="_blank" style="background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px;">
+                <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            </a>
         </div>
     </div>
 <style>
