@@ -172,32 +172,40 @@
         
             const updatePointsOnCheckboxChange = async () => {
                 const userId = localStorage.getItem("loggedInUserId");
-                console.log("User ID:", userId); // Debugging log
-                if (userId) {
-                    const checkbox = document.getElementById("chantCheckbox");
-                    const userRef = doc(db, "users", userId);
+                const checkbox = document.getElementById("chantCheckbox");
+                const userRef = doc(db, "users", userId);
         
-                    const userDoc = await getDoc(userRef);
-                    let currentPoints = userDoc.exists() ? (userDoc.data().chantPoints || 0) : 0;
+                const userDoc = await getDoc(userRef);
+                let currentPoints = userDoc.exists() ? (userDoc.data().chantPoints || 0) : 0;
         
-                    checkbox.checked = userDoc.exists() && userDoc.data().hasChanted;
+                checkbox.checked = userDoc.exists() && userDoc.data().hasChanted;
         
-                    checkbox.addEventListener('change', async () => {
-                        console.log("Checkbox changed. Checked:", checkbox.checked); // Debugging log
-                        if (checkbox.checked) {
-                            currentPoints += 10; // Add 10 points for checking the box
-                            await setDoc(userRef, { chantPoints: currentPoints, hasChanted: true }, { merge: true });
-                            document.getElementById("message").innerText = "You've gained 10 points for chanting!";
-                        } else {
-                            // Optional: Handle unchecking if you want to deduct points
-                            // currentPoints -= 10; // Uncomment if you want to deduct points
-                            // await setDoc(userRef, { chantPoints: currentPoints, hasChanted: false }, { merge: true });
-                            // document.getElementById("message").innerText = "You've lost points for unchecking.";
-                        }
-                    });
-                } else {
-                    alert("Please log in to earn points.");
+                // Check if the current time is past the stored timestamp for 8 AM
+                const lastCheckedTime = userDoc.exists() ? userDoc.data().lastCheckedTime : null;
+                const currentTime = new Date();
+                
+                // If it's past 8 AM and there's a valid lastCheckedTime, disable the checkbox
+                if (lastCheckedTime) {
+                    const lastCheckedDate = new Date(lastCheckedTime);
+                    if (currentTime.getHours() >= 8 && currentTime.toDateString() === lastCheckedDate.toDateString()) {
+                        checkbox.disabled = true;
+                        return; // Exit if the checkbox should be disabled
+                    }
                 }
+        
+                checkbox.addEventListener('change', async () => {
+                    if (checkbox.checked) {
+                        currentPoints += 10; // Add 10 points for checking the box
+                        const now = new Date();
+                        await setDoc(userRef, { 
+                            chantPoints: currentPoints, 
+                            hasChanted: true, 
+                            lastCheckedTime: now.toISOString() // Store the current timestamp
+                        }, { merge: true });
+                        document.getElementById("message").innerText = "You've gained 10 points for chanting!";
+                        checkbox.disabled = true; // Disable the checkbox after checking it
+                    }
+                });
             };
         
             window.onload = async () => {
@@ -206,8 +214,8 @@
                     await updatePointsOnCheckboxChange();
                 }
             };
-            
         </script>
+        
         
               
         
