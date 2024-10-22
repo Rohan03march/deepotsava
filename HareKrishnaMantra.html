@@ -180,17 +180,23 @@
         
                 checkbox.checked = userDoc.exists() && userDoc.data().hasChanted;
         
-                // Check if the current time is past the stored timestamp for 8 AM
+                // Get the last checked date
                 const lastCheckedTime = userDoc.exists() ? userDoc.data().lastCheckedTime : null;
                 const currentTime = new Date();
-                
-                // If it's past 8 AM and there's a valid lastCheckedTime, disable the checkbox
+                const currentDateString = currentTime.toDateString();
+        
+                // If there is a lastCheckedTime and it's today, disable the checkbox
                 if (lastCheckedTime) {
                     const lastCheckedDate = new Date(lastCheckedTime);
-                    if (currentTime.getHours() >= 8 && currentTime.toDateString() === lastCheckedDate.toDateString()) {
+                    if (currentDateString === lastCheckedDate.toDateString()) {
                         checkbox.disabled = true;
                         return; // Exit if the checkbox should be disabled
                     }
+                }
+        
+                // Check if the current time is within the allowed range
+                if (currentTime.getHours() >= 0 && currentTime.getHours() < 24) {
+                    checkbox.disabled = false; // Enable checkbox if within time range
                 }
         
                 checkbox.addEventListener('change', async () => {

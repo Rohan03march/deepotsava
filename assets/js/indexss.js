@@ -12,15 +12,13 @@ import {
   arrayUnion,
   arrayRemove,
   increment,
-  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 import {
   getStorage,
   ref,
-  uploadBytes,
+  uploadBytesResumable,
   getDownloadURL,
   deleteObject,
-  uploadBytesResumable,
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
 
 // Your Firebase config
@@ -83,6 +81,33 @@ document.addEventListener("DOMContentLoaded", () => {
         continue;
       }
 
+      // Check if the user has already uploaded an image today
+      const userDocRef = doc(db, "users", userId);
+      const userDoc = await getDoc(userDocRef);
+
+      let canUpload = true; // Flag to check if user can upload
+      if (userDoc.exists()) {
+        const lastImageTimestamp = userDoc.data().lastUploadTimestamp;
+        const currentDate = new Date();
+        
+        // Check if the last upload timestamp exists and is for today
+        if (lastImageTimestamp) {
+          const lastUploadDate = lastImageTimestamp.toDate();
+          if (
+            lastUploadDate.getFullYear() === currentDate.getFullYear() &&
+            lastUploadDate.getMonth() === currentDate.getMonth() &&
+            lastUploadDate.getDate() === currentDate.getDate()
+          ) {
+            canUpload = false; // User has already uploaded an image today
+          }
+        }
+      }
+
+      if (!canUpload) {
+        document.getElementById("status").innerText = "You can only upload one image per day.";
+        return; // Exit if user cannot upload
+      }
+
       const originalName = file.name.split(".")[0];
       const extension = file.name.split(".").pop();
       const newFileName = `${originalName}_${Date.now()}.${extension}`;
@@ -122,10 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
             timestamp: new Date().toLocaleString() // Add timestamp here
           };
 
-          const userDocRef = doc(db, "users", userId);
+          // Update user's document with the new image and the last upload timestamp
           await updateDoc(userDocRef, {
             images: arrayUnion(imageObject),
             imagePoints: increment(10),
+            lastUploadTimestamp: new Date() // Store the current timestamp
           });
 
           displayImage(imageObject);
@@ -173,31 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
     timestamp.style.fontSize = "15px";
     timestamp.style.textAlign = "center";
     timestamp.style.color = "black";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
-    deleteButton.classList.add("deleteButton");
-
-    deleteButton.addEventListener("click", async () => {
-      const storageRef = ref(storage, `${userId}/${image.name}`);
-      try {
-        await deleteObject(storageRef);
-        const userDocRef = doc(db, "users", userId);
-        await updateDoc(userDocRef, {
-          images: arrayRemove(image),
-          imagePoints: increment(-10),
-        });
-
-        imageGrid.removeChild(imageContainer);
-        await updatePointsDisplay(); // Update points display after deletion
-      } catch (error) {
-        //alert("Error deleting image: " + error.message);
-      }
-    });
-
     imageContainer.appendChild(img);
     imageContainer.appendChild(timestamp); // Append timestamp below the image
-    imageContainer.appendChild(deleteButton);
     imageGrid.appendChild(imageContainer);
   }
 });

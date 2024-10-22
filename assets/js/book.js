@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, updateDoc, arrayUnion, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBypZ0BZnoY-UVzb_3Hs0116vwu6OWmrCc",
@@ -21,7 +21,7 @@ const db = getFirestore();
 const commentInput = document.getElementById("commentInput");
 const submitButton = document.getElementById("submitButton");
 const commentsList = document.getElementById("commentsList");
-const totalPoints = document.getElementById("totalPoints"); // Element to display points
+const totalPoints = document.getElementById("totalPoints");
 
 const keywords = {
     "krishna": 5,
@@ -52,6 +52,14 @@ const isGreeting = (word) => {
     return greetings.includes(word.toLowerCase());
 };
 
+// Function to check if the user can submit a comment today
+const canSubmitCommentToday = (lastSubmitTimestamp) => {
+    const today = new Date();
+    return lastSubmitTimestamp.toDate().getDate() !== today.getDate() ||
+           lastSubmitTimestamp.toDate().getMonth() !== today.getMonth() ||
+           lastSubmitTimestamp.toDate().getFullYear() !== today.getFullYear();
+};
+
 // Function to create or get the user document
 const createUserDocument = async (user) => {
     const userRef = doc(db, "users", user.uid);
@@ -59,7 +67,8 @@ const createUserDocument = async (user) => {
     if (!snapshot.exists()) {
         await setDoc(userRef, {
             comments: [],
-            commentPoints: 0 // Initialize commentPoints
+            commentPoints: 0,
+            lastCommentTimestamp: null // Initialize lastCommentTimestamp
         });
     }
 };
@@ -78,6 +87,16 @@ submitButton.addEventListener("click", async () => {
 
     if (user && commentText) {
         try {
+            const userRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userRef);
+            const lastCommentTimestamp = userDoc.data().lastCommentTimestamp;
+
+            // Check if the user can submit a comment today
+            if (lastCommentTimestamp && !canSubmitCommentToday(lastCommentTimestamp)) {
+                alert("You've already submitted a comment today. Please try again tomorrow.");
+                return;
+            }
+
             let points = 0; // Start with 0 points
 
             // Check for keywords
@@ -95,8 +114,6 @@ submitButton.addEventListener("click", async () => {
                 }
             }
 
-            const userRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userRef); // Fetch current user document
             const currentCommentPoints = userDoc.data().commentPoints || 0; // Get current commentPoints
 
             await updateDoc(userRef, {
@@ -104,7 +121,8 @@ submitButton.addEventListener("click", async () => {
                     text: commentText,
                     timestamp: new Date(), // Store the current date and time
                 }),
-                commentPoints: currentCommentPoints + points // Update commentPoints
+                commentPoints: currentCommentPoints + points, // Update commentPoints
+                lastCommentTimestamp: new Date() // Update lastCommentTimestamp
             });
 
             // Update points display after submitting a comment
@@ -163,7 +181,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-
 window.onload = function() {
     const chapter1Title = document.getElementById('chapter1-title');
     const chapter1Content = document.getElementById('chapter1-content');
@@ -174,16 +191,16 @@ window.onload = function() {
 
     // Listen for real-time updates
     onSnapshot(chaptersRef, (snapshot) => {
-      snapshot.forEach((doc) => {
-        const chapterData = doc.data();
-        
-        if (doc.id === 'chapter1') {
-          chapter1Title.innerText = chapterData.title;
-          chapter1Content.innerText = chapterData.content;
-        } else if (doc.id === 'chapter2') {
-          chapter2Title.innerText = chapterData.title;
-          chapter2Content.innerText = chapterData.content;
-        }
-      });
+        snapshot.forEach((doc) => {
+            const chapterData = doc.data();
+            
+            if (doc.id === 'chapter1') {
+                chapter1Title.innerText = chapterData.title;
+                chapter1Content.innerText = chapterData.content;
+            } else if (doc.id === 'chapter2') {
+                chapter2Title.innerText = chapterData.title;
+                chapter2Content.innerText = chapterData.content;
+            }
+        });
     });
-  };
+};

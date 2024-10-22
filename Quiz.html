@@ -99,7 +99,7 @@
     </style>
     
     <div class="text-container">
-        <img src="./assets/img/puzzle.jpg" alt="Puzzle Image" class="image">
+        <img id="dynamicImage" alt="Puzzle Image" class="image">
         <style>
             .image {
                 border-radius: 20px;
@@ -148,32 +148,72 @@
     const auth = getAuth(app);
     const db = getFirestore();
 
-    const correctAnswers = ["NARADA","narada"]; 
+    async function fetchImageUrl() {
+        const docRef = doc(db, "images", "images"); // Reference to the document
+        const docSnap = await getDoc(docRef);
+    
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('dynamicImage').src = data.imageUrl; // Set the image source
+        } else {
+            console.error("No such document!");
+        }
+    }
+
+    async function updateImageUrl() {
+        const imageUrl = document.getElementById('imageUrlInput').value;
+        if (imageUrl) {
+            const docRef = doc(db, "images", "images"); // Reference to the document
+            await setDoc(docRef, { imageUrl: imageUrl }); // Update the image URL
+            document.getElementById('dynamicImage').src = imageUrl; // Update the displayed image
+            document.getElementById('imageUrlInput').value = ''; // Clear the input
+        } else {
+            alert("Please enter a valid image URL from Storage");
+        }
+    }
+   
+    fetchImageUrl().catch(console.error);
+
+    let correctAnswers = []; // Initialize correct answers array
     let userPoints = 0; // Initialize user points
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function getCurrentDate() {
+        const date = new Date();
+        return date.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        await fetchCorrectAnswers(); // Fetch correct answers from Firestore
+    
         document.getElementById("submitButton").addEventListener("click", async () => {
             const answerInput = document.getElementById("commentInput").value.trim().toLowerCase();
-
+    
             if (answerInput === "") {
                 alert("Please enter an answer.");
                 return;
             }
-
+    
             const user = auth.currentUser;
-
+    
             if (user) {
                 const userDocRef = doc(db, "users", user.uid);
                 const userDoc = await getDoc(userDocRef);
 
+                const currentDate = getCurrentDate();
+
                 if (userDoc.exists() && userDoc.data().hasAnswered) {
-                    displayMessage("You've already answered this question.");
-                    return;
+                    const lastAnsweredDate = userDoc.data().lastAnsweredDate;
+
+                    // Check if the user answered today
+                    if (lastAnsweredDate === currentDate) {
+                        displayMessage("You've already answered this question today.");
+                        return;
+                    }
                 }
 
                 if (correctAnswers.includes(answerInput)) {
                     userPoints += 10; // Award points
-                    await savePointsToFirestore(userPoints, userDocRef);
+                    await savePointsToFirestore(userPoints, userDocRef, currentDate);
                     displayMessage("Correct answer! Points awarded.");
                     document.getElementById("submitButton").disabled = true; // Disable button
                 } else {
@@ -182,18 +222,31 @@
             } else {
                 console.error("User not authenticated.");
             }
-
+    
             document.getElementById("commentInput").value = "";
         });
     });
-
-    async function savePointsToFirestore(points, userDocRef) {
+    
+    async function fetchCorrectAnswers() {
+        const correctAnswersDocRef = doc(db, "Answers", "answer"); // Firestore path
+        const correctAnswersDoc = await getDoc(correctAnswersDocRef);
+    
+        if (correctAnswersDoc.exists()) {
+            // Assuming the field "answer" is an array of correct answers
+            correctAnswers = correctAnswersDoc.data().answer.map(answer => answer.toLowerCase()); // Ensure case-insensitivity
+        } else {
+            console.error("No correct answers found in Firestore.");
+        }
+    }
+    
+    async function savePointsToFirestore(points, userDocRef, currentDate) {
         await setDoc(userDocRef, {
             Answerpoints: points,
-            hasAnswered: true // Mark as answered
+            hasAnswered: true, // Mark as answered
+            lastAnsweredDate: currentDate // Store the date when the user answered
         }, { merge: true });
     }
-
+    
     function displayMessage(message) {
         const commentsList = document.getElementById("commentsList");
         const li = document.createElement("li");
@@ -201,6 +254,7 @@
         commentsList.appendChild(li);
     }
 </script>
+
 
 
 <style>
