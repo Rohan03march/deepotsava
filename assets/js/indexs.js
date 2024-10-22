@@ -113,7 +113,7 @@ const fetchUserPoints = async (userId) => {
         const points = data.commentPoints || 0; // Default to 0 if not present
         const answerpoints = data.Answerpoints || 0;
         const musicpoints = data.chantPoints || 0;
-        const totalPoints = imagePoints + points+answerpoints+musicpoints ;
+        const totalPoints = imagePoints + points + answerpoints + musicpoints ;
         
         
         // Display total points
