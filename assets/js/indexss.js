@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       }
+      
 
       if (!canUpload) {
         document.getElementById("status").innerText = "You can only upload one image per day.";
